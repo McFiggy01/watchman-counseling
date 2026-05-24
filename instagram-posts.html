@@ -6,967 +6,837 @@
 <title>Watchman Counseling — Instagram Posts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    background: #111;
-    padding: 40px 20px;
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 60px;
-  }
+body {
+  background: #0a0a0a;
+  padding: 40px 16px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
 
-  h1.page-title {
-    color: #34d399;
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  p.page-sub {
-    color: #475569;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+h1.page-title {
+  color: #34d399;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  text-align: center;
+}
+p.page-sub {
+  color: #4b5563;
+  font-size: 0.82rem;
+  text-align: center;
+  margin-top: 6px;
+}
+.post-label {
+  color: #4b5563;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: -32px;
+}
 
-  .post-label {
-    color: #64748b;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    text-align: center;
-  }
+/* ── SCALING WRAPPER ──
+   The .post inside is always 1080×1080.
+   JS scales it to fit the viewport. */
+.post-wrapper {
+  width: 100%;
+  max-width: 1080px;
+  /* height is set by JS */
+  position: relative;
+  flex-shrink: 0;
+}
 
-  /* ── BASE POST ── */
-  .post {
-    width: 1080px;
-    height: 1080px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+/* ── BASE POST: all measurements in px at 1080 design units ── */
+.post {
+  width: 1080px;
+  height: 1080px;
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
-  /* ─── BACKGROUND VARIANTS ─── */
+/* ── BACKGROUNDS ── */
+.bg-a { background: radial-gradient(ellipse 100% 80% at 50% 55%, #064e3b 0%, #022c22 55%, #010e0b 100%); }
+.bg-b { background: linear-gradient(155deg, #033527 0%, #011a12 50%, #000 100%); }
+.bg-c { background: linear-gradient(140deg, #064e3b 0%, #033527 40%, #011810 70%, #000 100%); }
+.bg-d { background: radial-gradient(circle at 45% 38%, #085c45 0%, #033527 38%, #010f0c 100%); }
+.bg-e { background: linear-gradient(170deg, #01200f 0%, #022c22 45%, #000 100%); }
 
-  /* Variant A — Deep forest dark with radial glow */
-  .bg-a {
-    background: radial-gradient(ellipse 90% 70% at 50% 60%, #064e3b 0%, #022c22 55%, #010f0d 100%);
-  }
+/* ── TOP ACCENT BAR ── */
+.top-accent {
+  height: 6px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, transparent 0%, #10b981 25%, #34d399 50%, #10b981 75%, transparent 100%);
+}
 
-  /* Variant B — Near-black with emerald top wash */
-  .bg-b {
-    background: linear-gradient(160deg, #022c22 0%, #010e0b 45%, #000 100%);
-  }
+/* ── DECORATIVE LAYER ── */
+.deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
 
-  /* Variant C — Forest emerald gradient */
-  .bg-c {
-    background: linear-gradient(145deg, #064e3b 0%, #033527 40%, #022c22 70%, #000 100%);
-  }
+/* Corner brackets */
+.deco-brackets::before,
+.deco-brackets::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-color: rgba(52,211,153,.2);
+  border-style: solid;
+}
+.deco-brackets::before { top: 48px; left: 48px; border-width: 2px 0 0 2px; }
+.deco-brackets::after  { bottom: 100px; right: 48px; border-width: 0 2px 2px 0; }
 
-  /* Variant D — Very dark with centre radial highlight */
-  .bg-d {
-    background: radial-gradient(circle at 50% 40%, #085c45 0%, #033527 40%, #010f0c 100%);
-  }
+/* Radial glow top-right */
+.deco-glow::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16,185,129,.13) 0%, transparent 70%);
+}
 
-  /* Variant E — Warm dark teal */
-  .bg-e {
-    background: linear-gradient(175deg, #012318 0%, #022c22 40%, #000 100%);
-  }
+/* Dot grid */
+.deco-dots {
+  background-image: radial-gradient(circle, rgba(52,211,153,.1) 1.5px, transparent 1.5px);
+  background-size: 54px 54px;
+}
 
-  /* ─── DECORATIVE LAYER ─── */
-  .deco {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
+/* Cross watermark */
+.deco-cross::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      transparent calc(50% - 2px),
+      rgba(16,185,129,.05) calc(50% - 2px),
+      rgba(16,185,129,.05) calc(50% + 2px),
+      transparent calc(50% + 2px)),
+    linear-gradient(to right,
+      transparent calc(50% - 2px),
+      rgba(16,185,129,.05) calc(50% - 2px),
+      rgba(16,185,129,.05) calc(50% + 2px),
+      transparent calc(50% + 2px));
+}
 
-  /* cross watermark */
-  .deco-cross::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px; height: 700px;
-    background:
-      linear-gradient(to bottom, transparent calc(50% - 3px), rgba(16,185,129,.06) calc(50% - 3px), rgba(16,185,129,.06) calc(50% + 3px), transparent calc(50% + 3px)),
-      linear-gradient(to right,  transparent calc(50% - 3px), rgba(16,185,129,.06) calc(50% - 3px), rgba(16,185,129,.06) calc(50% + 3px), transparent calc(50% + 3px));
-  }
+/* Big quote mark behind text */
+.bg-quote {
+  position: absolute;
+  z-index: 1;
+  font-family: 'Playfair Display', serif;
+  font-size: 600px;
+  line-height: 1;
+  color: rgba(16,185,129,.04);
+  pointer-events: none;
+  top: -60px;
+  left: -10px;
+  font-weight: 800;
+  user-select: none;
+}
 
-  /* radial glow accent top-right */
-  .deco-glow::after {
-    content: '';
-    position: absolute;
-    top: -120px; right: -120px;
-    width: 560px; height: 560px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(16,185,129,.12) 0%, transparent 70%);
-  }
+/* ── CONTENT AREA ── */
+.post-inner {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 52px 96px 20px;
+  overflow: hidden;
+}
 
-  /* sunburst rays */
-  .deco-rays {
-    position: absolute;
-    inset: 0;
-  }
-  .deco-rays svg {
-    width: 100%; height: 100%;
-    opacity: .04;
-  }
+.post-inner.align-left {
+  align-items: flex-start;
+  text-align: left;
+}
 
-  /* corner bracket ornaments */
-  .deco-brackets {
-    position: absolute;
-    inset: 52px;
-  }
-  .deco-brackets::before,
-  .deco-brackets::after {
-    content: '';
-    position: absolute;
-    width: 90px; height: 90px;
-    border-color: rgba(52,211,153,.22);
-    border-style: solid;
-  }
-  .deco-brackets::before {
-    top: 0; left: 0;
-    border-width: 2px 0 0 2px;
-  }
-  .deco-brackets::after {
-    bottom: 0; right: 0;
-    border-width: 0 2px 2px 0;
-  }
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: #34d399;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  opacity: .9;
+}
 
-  /* dot grid */
-  .deco-dots {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(52,211,153,.12) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: .35;
-  }
+.rule {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #10b981, transparent);
+  margin: 0 auto 32px;
+  flex-shrink: 0;
+}
+.align-left .rule {
+  margin-left: 0;
+}
 
-  /* thin horizontal rule */
-  .deco-lines {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(to right, transparent 0%, rgba(16,185,129,.1) 50%, transparent 100%);
-    background-size: 100% 1px;
-    background-repeat: repeat-y;
-    background-position: 0 0;
-  }
+/* Statement text */
+.statement {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  color: #fdfaf3;
+  line-height: 1.22;
+  margin-bottom: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-shadow: 0 2px 24px rgba(0,0,0,.55);
+  flex-shrink: 0;
+}
 
-  /* ─── CONTENT AREA ─── */
-  .post-inner {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 110px;
-    height: 100%;
-    width: 100%;
-  }
+.statement.xl { font-size: 78px; }
+.statement.lg { font-size: 66px; }
+.statement.md { font-size: 58px; }
+.statement.sm { font-size: 50px; }
+.statement.xs { font-size: 44px; }
 
-  .eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    color: #34d399;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    opacity: .85;
-  }
+.statement em {
+  color: #34d399;
+  font-style: italic;
+}
 
-  .divider-line {
-    width: 56px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #10b981, transparent);
-    margin: 0 auto 36px;
-  }
+/* Scripture block */
+.scripture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.align-left .scripture {
+  align-items: flex-start;
+}
 
-  .statement {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: #fdfaf3;
-    line-height: 1.28;
-    margin-bottom: 36px;
-    text-shadow: 0 2px 20px rgba(0,0,0,.5);
-  }
+.s-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(185,224,196,.82);
+  line-height: 1.55;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
 
-  .statement.size-lg  { font-size: 3.4rem; }
-  .statement.size-md  { font-size: 2.9rem; }
-  .statement.size-sm  { font-size: 2.5rem; }
-  .statement.size-xs  { font-size: 2.15rem; }
+.s-ref {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #10b981;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
 
-  .statement em {
-    color: #34d399;
-    font-style: italic;
-  }
+/* ── BRAND BAR ── */
+.brand-bar {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-top: 1px solid rgba(16,185,129,.16);
+  background: linear-gradient(to top, rgba(1,10,8,.95) 0%, rgba(1,10,8,.6) 100%);
+  padding: 0 60px;
+}
 
-  .scripture-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 48px;
-  }
+.brand-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid rgba(52,211,153,.38);
+  flex-shrink: 0;
+}
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-  .scripture-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    font-style: italic;
-    color: rgba(185,224,196,.85);
-    line-height: 1.55;
-    max-width: 680px;
-    text-align: center;
-  }
-
-  .scripture-ref {
-    font-family: 'Cinzel', serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: #10b981;
-    text-transform: uppercase;
-  }
-
-  /* ─── BOTTOM BRANDING ─── */
-  .brand-bar {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    z-index: 20;
-    height: 88px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    border-top: 1px solid rgba(16,185,129,.18);
-    background: linear-gradient(to top, rgba(1,14,11,.9) 0%, transparent 100%);
-    padding: 0 60px;
-  }
-
-  .brand-logo-wrap {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1.5px solid rgba(52,211,153,.4);
-    flex-shrink: 0;
-  }
-  .brand-logo-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .brand-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: #fdfaf3;
-    text-transform: uppercase;
-  }
-  .brand-tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    color: #34d399;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  /* ─── TOP ACCENT BAR ─── */
-  .top-accent {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(to right, transparent 0%, #10b981 30%, #34d399 50%, #10b981 70%, transparent 100%);
-    z-index: 20;
-  }
-
-  /* ─── QUOTE MARK ─── */
-  .big-quote {
-    position: absolute;
-    z-index: 5;
-    font-family: 'Playfair Display', serif;
-    font-size: 28rem;
-    line-height: 1;
-    color: rgba(16,185,129,.04);
-    pointer-events: none;
-    top: -60px;
-    left: 20px;
-    font-weight: 800;
-    user-select: none;
-  }
-
-  /* Layout: left-aligned */
-  .layout-left .post-inner {
-    align-items: flex-start;
-    text-align: left;
-    padding-left: 120px;
-  }
-  .layout-left .divider-line {
-    margin: 0 0 36px 0;
-  }
-  .layout-left .scripture-wrap {
-    align-items: flex-start;
-  }
-  .layout-left .scripture-text {
-    text-align: left;
-  }
-
-  /* Layout: split — large quote top, scripture bottom */
-  .layout-split .post-inner {
-    justify-content: space-between;
-    padding-top: 100px;
-    padding-bottom: 110px;
-  }
-
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.brand-name {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #fdfaf3;
+  text-transform: uppercase;
+}
+.brand-url {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #34d399;
+  font-weight: 500;
+}
 </style>
 </head>
 <body>
 
 <h1 class="page-title">Watchman Counseling — Instagram Posts</h1>
-<p class="page-sub">20 mental health + scripture posts · 1080 × 1080 px · Screenshot each individually</p>
+<p class="page-sub">20 posts · 1080 × 1080 px · Scales to fit your screen</p>
 
-<!-- ══════════════════════════════════════
-     POST 1
-══════════════════════════════════════ -->
-<div class="post-label">Post 1 of 20</div>
+<!-- ══════════════════════════════
+  HELPER MACRO — each post just changes bg/deco/content
+══════════════════════════════ -->
+
+<!-- POST 1 -->
+<div class="post-label">1 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-a">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Mental Health · Faith</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      You are not<br/>your <em>anxiety.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Do not be anxious about anything… the peace of God, which surpasses all understanding, will guard your hearts."</p>
-      <span class="scripture-ref">Philippians 4:6–7</span>
+    <div class="rule"></div>
+    <p class="statement lg">You are not<br/>your <em>anxiety.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Do not be anxious about anything… the peace of God,<br/>which surpasses all understanding,<br/>will guard your hearts and minds."</p>
+      <span class="s-ref">Philippians 4:6–7</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 2
-══════════════════════════════════════ -->
-<div class="post-label">Post 2 of 20</div>
-<div class="post bg-b layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 2 -->
+<div class="post-label">2 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-b">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Healing · Courage</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Asking for help<br/>is not weakness.<br/>It is <em>wisdom.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Where there is no guidance a people falls, but in an abundance of counselors there is safety."</p>
-      <span class="scripture-ref">Proverbs 11:14</span>
+    <div class="rule"></div>
+    <p class="statement lg">Asking for help<br/>is not weakness.<br/>It is <em>wisdom.</em></p>
+    <div class="scripture">
+      <p class="s-text">"In an abundance of counselors<br/>there is safety."</p>
+      <span class="s-ref">Proverbs 11:14</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 3
-══════════════════════════════════════ -->
-<div class="post-label">Post 3 of 20</div>
+<!-- POST 3 -->
+<div class="post-label">3 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-c">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Trauma · Grace</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      Your trauma<br/>does not<br/><em>define you.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"My grace is sufficient for you, for my power is made perfect in weakness."</p>
-      <span class="scripture-ref">2 Corinthians 12:9</span>
+    <div class="rule"></div>
+    <p class="statement xl">Your trauma<br/>does not<br/><em>define you.</em></p>
+    <div class="scripture">
+      <p class="s-text">"My grace is sufficient for you,<br/>for my power is made perfect in weakness."</p>
+      <span class="s-ref">2 Corinthians 12:9</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 4
-══════════════════════════════════════ -->
-<div class="post-label">Post 4 of 20</div>
-<div class="post bg-d layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 4 -->
+<div class="post-label">4 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-d">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Rest · Restoration</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      Rest is<br/><em>sacred.</em><br/>Even God rested.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Come to me, all who are weary and burdened, and I will give you rest."</p>
-      <span class="scripture-ref">Matthew 11:28</span>
+    <div class="rule"></div>
+    <p class="statement xl">Rest is<br/><em>sacred.</em><br/>Even God rested.</p>
+    <div class="scripture">
+      <p class="s-text">"Come to me, all who are weary<br/>and burdened, and I will give you rest."</p>
+      <span class="s-ref">Matthew 11:28</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 5
-══════════════════════════════════════ -->
-<div class="post-label">Post 5 of 20</div>
+<!-- POST 5 -->
+<div class="post-label">5 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-e">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Depression · Hope</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      <em>Depression lies.</em><br/>The Word<br/>does not.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"The Lord is close to the brokenhearted and saves those who are crushed in spirit."</p>
-      <span class="scripture-ref">Psalm 34:18</span>
+    <div class="rule"></div>
+    <p class="statement lg"><em>Depression lies.</em><br/>The Word does not.</p>
+    <div class="scripture">
+      <p class="s-text">"The Lord is close to the brokenhearted<br/>and saves those who are crushed in spirit."</p>
+      <span class="s-ref">Psalm 34:18</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 6
-══════════════════════════════════════ -->
-<div class="post-label">Post 6 of 20</div>
-<div class="post bg-a layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 6 -->
+<div class="post-label">6 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-a">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Identity · Worth</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      You are more<br/>than your<br/><em>worst moment.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"There is therefore now no condemnation for those who are in Christ Jesus."</p>
-      <span class="scripture-ref">Romans 8:1</span>
+    <div class="rule"></div>
+    <p class="statement xl">You are more<br/>than your<br/><em>worst moment.</em></p>
+    <div class="scripture">
+      <p class="s-text">"There is therefore now no condemnation<br/>for those who are in Christ Jesus."</p>
+      <span class="s-ref">Romans 8:1</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 7
-══════════════════════════════════════ -->
-<div class="post-label">Post 7 of 20</div>
+<!-- POST 7 -->
+<div class="post-label">7 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-b">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Boundaries · Wisdom</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Boundaries are<br/>not walls.<br/>They are <em>wisdom.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Guard your heart above all else, for everything you do flows from it."</p>
-      <span class="scripture-ref">Proverbs 4:23</span>
+    <div class="rule"></div>
+    <p class="statement lg">Boundaries are<br/>not walls.<br/>They are <em>wisdom.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Guard your heart above all else,<br/>for everything you do flows from it."</p>
+      <span class="s-ref">Proverbs 4:23</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 8
-══════════════════════════════════════ -->
-<div class="post-label">Post 8 of 20</div>
-<div class="post bg-c layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 8 -->
+<div class="post-label">8 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-c">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Mind · Peace</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Your <em>mind matters.</em><br/>Guard it like<br/>the Word says.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"The peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus."</p>
-      <span class="scripture-ref">Philippians 4:7</span>
+    <div class="rule"></div>
+    <p class="statement md">Your <em>mind matters.</em><br/>Guard it like<br/>the Word says.</p>
+    <div class="scripture">
+      <p class="s-text">"The peace of God, which surpasses all understanding,<br/>will guard your hearts and minds in Christ Jesus."</p>
+      <span class="s-ref">Philippians 4:7</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 9
-══════════════════════════════════════ -->
-<div class="post-label">Post 9 of 20</div>
+<!-- POST 9 -->
+<div class="post-label">9 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-d">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Grief · Faith</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      Grief is not<br/>a lack of faith.<br/>It's <em>proof you loved.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Jesus wept."</p>
-      <span class="scripture-ref">John 11:35</span>
+    <div class="rule"></div>
+    <p class="statement lg">Grief is not<br/>a lack of faith.<br/>It's <em>proof you loved.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Jesus wept."</p>
+      <span class="s-ref">John 11:35</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 10
-══════════════════════════════════════ -->
-<div class="post-label">Post 10 of 20</div>
-<div class="post bg-e layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 10 -->
+<div class="post-label">10 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-e">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Recovery · Freedom</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      <em>Sobriety</em><br/>is possible.<br/>Freedom is promised.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"So if the Son sets you free, you will be free indeed."</p>
-      <span class="scripture-ref">John 8:36</span>
+    <div class="rule"></div>
+    <p class="statement xl"><em>Sobriety</em><br/>is possible.<br/>Freedom is promised.</p>
+    <div class="scripture">
+      <p class="s-text">"So if the Son sets you free,<br/>you will be free indeed."</p>
+      <span class="s-ref">John 8:36</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 11
-══════════════════════════════════════ -->
-<div class="post-label">Post 11 of 20</div>
+<!-- POST 11 -->
+<div class="post-label">11 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-a">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Seen · Known</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      You are <em>seen</em><br/>even in<br/>the dark places.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Even the darkness is not dark to you; the night is bright as the day, for darkness is as light with you."</p>
-      <span class="scripture-ref">Psalm 139:12</span>
+    <div class="rule"></div>
+    <p class="statement xl">You are <em>seen</em><br/>even in<br/>the dark places.</p>
+    <div class="scripture">
+      <p class="s-text">"Even the darkness is not dark to you;<br/>the night is as bright as the day."</p>
+      <span class="s-ref">Psalm 139:12</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 12
-══════════════════════════════════════ -->
-<div class="post-label">Post 12 of 20</div>
-<div class="post bg-b layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 12 -->
+<div class="post-label">12 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-b">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Men's Health · Strength</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Men need<br/>healing too.<br/><em>Strength admits it.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"The Lord is close to the brokenhearted and saves those who are crushed in spirit."</p>
-      <span class="scripture-ref">Psalm 34:18</span>
+    <div class="rule"></div>
+    <p class="statement lg">Men need<br/>healing too.<br/><em>Strength admits it.</em></p>
+    <div class="scripture">
+      <p class="s-text">"The Lord is close to the brokenhearted<br/>and saves those who are crushed in spirit."</p>
+      <span class="s-ref">Psalm 34:18</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 13
-══════════════════════════════════════ -->
-<div class="post-label">Post 13 of 20</div>
+<!-- POST 13 -->
+<div class="post-label">13 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-c">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Love · Belonging</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      You don't have<br/>to <em>perform</em><br/>to be loved.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God."</p>
-      <span class="scripture-ref">Romans 8:38–39</span>
+    <div class="rule"></div>
+    <p class="statement lg">You don't have to<br/><em>perform</em><br/>to be loved.</p>
+    <div class="scripture">
+      <p class="s-text">"Nothing in all creation will be able<br/>to separate us from the love of God."</p>
+      <span class="s-ref">Romans 8:38–39</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 14
-══════════════════════════════════════ -->
-<div class="post-label">Post 14 of 20</div>
-<div class="post bg-d layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 14 -->
+<div class="post-label">14 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-d">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
-    <div class="eyebrow">Anger · Emotion</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      <em>Anger</em> is not sin.<br/>What you do<br/>with it can be.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"In your anger do not sin: do not let the sun go down while you are still angry."</p>
-      <span class="scripture-ref">Ephesians 4:26</span>
+  <div class="post-inner align-left">
+    <div class="eyebrow">Anger · Regulation</div>
+    <div class="rule"></div>
+    <p class="statement lg"><em>Anger</em> is not sin.<br/>What you do<br/>with it can be.</p>
+    <div class="scripture">
+      <p class="s-text">"In your anger do not sin:<br/>do not let the sun go down<br/>while you are still angry."</p>
+      <span class="s-ref">Ephesians 4:26</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 15
-══════════════════════════════════════ -->
-<div class="post-label">Post 15 of 20</div>
+<!-- POST 15 -->
+<div class="post-label">15 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-e">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Hope · Future</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Your story<br/>isn't over.<br/><em>Keep reading.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"For I know the plans I have for you, plans to prosper you and not to harm you, plans to give you hope and a future."</p>
-      <span class="scripture-ref">Jeremiah 29:11</span>
+    <div class="rule"></div>
+    <p class="statement lg">Your story<br/>isn't over.<br/><em>Keep reading.</em></p>
+    <div class="scripture">
+      <p class="s-text">"For I know the plans I have for you —<br/>plans to give you hope and a future."</p>
+      <span class="s-ref">Jeremiah 29:11</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 16
-══════════════════════════════════════ -->
-<div class="post-label">Post 16 of 20</div>
-<div class="post bg-a layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 16 -->
+<div class="post-label">16 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-a">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Fear · Courage</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      <em>Fear</em> is real.<br/>But so is<br/>the One beside you.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you."</p>
-      <span class="scripture-ref">Isaiah 41:10</span>
+    <div class="rule"></div>
+    <p class="statement xl"><em>Fear</em> is real.<br/>But so is<br/>the One beside you.</p>
+    <div class="scripture">
+      <p class="s-text">"Do not fear, for I am with you;<br/>I will strengthen you and help you."</p>
+      <span class="s-ref">Isaiah 41:10</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 17
-══════════════════════════════════════ -->
-<div class="post-label">Post 17 of 20</div>
+<!-- POST 17 -->
+<div class="post-label">17 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-b">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Anxiety · Surrender</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      Anxiety is<br/>a signal —<br/>not a <em>sentence.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Cast all your anxiety on him because he cares for you."</p>
-      <span class="scripture-ref">1 Peter 5:7</span>
+    <div class="rule"></div>
+    <p class="statement lg">Anxiety is<br/>a signal —<br/>not a <em>sentence.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Cast all your anxiety on him<br/>because he cares for you."</p>
+      <span class="s-ref">1 Peter 5:7</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 18
-══════════════════════════════════════ -->
-<div class="post-label">Post 18 of 20</div>
-<div class="post bg-c layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 18 -->
+<div class="post-label">18 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-c">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Loneliness · Community</div>
-    <div class="divider-line"></div>
-    <p class="statement size-lg">
-      You were never<br/>meant to carry<br/>this <em>alone.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Carry each other's burdens, and in this way you will fulfill the law of Christ."</p>
-      <span class="scripture-ref">Galatians 6:2</span>
+    <div class="rule"></div>
+    <p class="statement xl">You were never<br/>meant to carry<br/>this <em>alone.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Carry each other's burdens,<br/>and in this way you will fulfill<br/>the law of Christ."</p>
+      <span class="s-ref">Galatians 6:2</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 19
-══════════════════════════════════════ -->
-<div class="post-label">Post 19 of 20</div>
+<!-- POST 19 -->
+<div class="post-label">19 / 20</div>
+<div class="post-wrapper">
 <div class="post bg-d">
-  <div class="deco deco-cross"></div>
-  <div class="deco deco-glow"></div>
-  <div class="deco deco-brackets"></div>
-  <div class="big-quote">"</div>
+  <div class="deco deco-cross deco-glow deco-brackets"></div>
+  <div class="bg-quote">"</div>
   <div class="top-accent"></div>
-
   <div class="post-inner">
     <div class="eyebrow">Worth · Identity</div>
-    <div class="divider-line"></div>
-    <p class="statement size-sm">
-      The same God<br/>who created<br/>the universe<br/><em>knows your name.</em>
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Fear not, for I have redeemed you; I have called you by name, you are mine."</p>
-      <span class="scripture-ref">Isaiah 43:1</span>
+    <div class="rule"></div>
+    <p class="statement sm">The God who<br/>made the universe<br/><em>knows your name.</em></p>
+    <div class="scripture">
+      <p class="s-text">"Fear not, for I have redeemed you;<br/>I have called you by name — you are mine."</p>
+      <span class="s-ref">Isaiah 43:1</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ══════════════════════════════════════
-     POST 20
-══════════════════════════════════════ -->
-<div class="post-label">Post 20 of 20</div>
-<div class="post bg-e layout-left">
-  <div class="deco deco-dots"></div>
-  <div class="deco deco-brackets"></div>
+<!-- POST 20 -->
+<div class="post-label">20 / 20</div>
+<div class="post-wrapper">
+<div class="post bg-e">
+  <div class="deco deco-dots deco-brackets"></div>
   <div class="top-accent"></div>
-
-  <div class="post-inner">
+  <div class="post-inner align-left">
     <div class="eyebrow">Wholeness · Healing</div>
-    <div class="divider-line"></div>
-    <p class="statement size-md">
-      You were<br/><em>wired to heal.</em><br/>Science and<br/>Scripture agree.
-    </p>
-    <div class="scripture-wrap">
-      <p class="scripture-text">"Beloved, I pray that all may go well with you and that you may be in good health, as it goes well with your soul."</p>
-      <span class="scripture-ref">3 John 1:2</span>
+    <div class="rule"></div>
+    <p class="statement md">You were<br/><em>wired to heal.</em><br/>Science and<br/>Scripture agree.</p>
+    <div class="scripture">
+      <p class="s-text">"Beloved, I pray that you may be<br/>in good health, as it goes well with your soul."</p>
+      <span class="s-ref">3 John 1:2</span>
     </div>
   </div>
-
   <div class="brand-bar">
-    <div class="brand-logo-wrap"><img src="Watchman-Counseling-Logo-small.png" alt="Watchman Counseling" /></div>
+    <div class="brand-logo"><img src="Watchman-Counseling-Logo-small.png" alt="" /></div>
     <div class="brand-text">
       <span class="brand-name">Watchman Counseling</span>
-      <span class="brand-tagline">watchmancounseling.com</span>
+      <span class="brand-url">watchmancounseling.com</span>
     </div>
   </div>
 </div>
+</div>
 
+<script>
+  function scalePosts() {
+    const gap = window.innerWidth < 600 ? 32 : 80;
+    const available = Math.min(window.innerWidth - gap, 1080);
+    const scale = available / 1080;
+
+    document.querySelectorAll('.post-wrapper').forEach(function(wrapper) {
+      wrapper.style.width  = available + 'px';
+      wrapper.style.height = available + 'px';
+    });
+
+    document.querySelectorAll('.post').forEach(function(post) {
+      post.style.transform      = 'scale(' + scale + ')';
+      post.style.transformOrigin = 'top left';
+    });
+  }
+
+  scalePosts();
+  window.addEventListener('resize', scalePosts);
+</script>
 </body>
 </html>
