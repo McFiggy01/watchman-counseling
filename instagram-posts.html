@@ -10,45 +10,55 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Logo color palette ──────────────────────────────
+   Near-black backgrounds pulled directly from the logo's
+   dark outer circle, vivid emerald from the watchman figure,
+   lighter lime-green from the sunburst rays.
+─────────────────────────────────────────────────────── */
+:root {
+  --green-vivid:  #18C860;   /* watchman figure green  */
+  --green-light:  #40E882;   /* lighter glow           */
+  --green-ray:    #8ED84A;   /* sunburst ray tint       */
+  --green-subtle: rgba(24,200,96,.1);
+  --dark-1: #050D08;         /* logo outer ring        */
+  --dark-2: #030A06;
+  --dark-3: #020706;
+  --dark-4: #081408;
+  --dark-5: #040D06;
+  --text-primary: #F6FBF7;
+  --text-verse:   rgba(155,230,170,.82);
+}
+
 body {
-  background: #0a0a0a;
-  padding: 40px 0;
+  background: #030603;
+  padding: 48px 0;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 32px;
   overflow-x: hidden;
 }
 
 .page-title {
-  color: #34d399;
+  color: var(--green-vivid);
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.1rem, 5vw, 1.8rem);
   text-align: center;
   padding: 0 16px;
 }
 .page-sub {
-  color: #4b5563;
+  color: #374140;
   font-size: 0.78rem;
   text-align: center;
   margin-top: 6px;
   padding: 0 16px;
 }
-.post-label {
-  color: #374151;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: -36px;
-}
 
 /* ─────────────────────────────────────────
-   THE POST
-   Fixed at 1080×1080. `zoom` (set by JS)
-   scales it + its layout footprint together,
-   so posts never overlap.
+   THE POST  —  1080 × 1080 px design units
+   CSS zoom scales it + its layout footprint
+   so posts never overlap on any screen.
 ───────────────────────────────────────── */
 .post {
   width: 1080px;
@@ -60,19 +70,21 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Backgrounds ── */
-.bg-a { background: radial-gradient(ellipse 110% 85% at 50% 58%, #064e3b 0%, #022c22 52%, #010e0b 100%); }
-.bg-b { background: linear-gradient(155deg, #033527 0%, #011a12 48%, #000 100%); }
-.bg-c { background: linear-gradient(142deg, #064e3b 0%, #033527 38%, #011810 68%, #000 100%); }
-.bg-d { background: radial-gradient(circle at 44% 40%, #085c45 0%, #033527 36%, #010f0c 100%); }
-.bg-e { background: linear-gradient(168deg, #01200f 0%, #022c22 44%, #000 100%); }
+/* ── Backgrounds (near-black, logo-true) ── */
+.bg-a { background: radial-gradient(ellipse 110% 85% at 50% 58%, #0B1E0E 0%, var(--dark-1) 52%, #020505 100%); }
+.bg-b { background: linear-gradient(155deg, #091409 0%, var(--dark-2) 48%, #010302 100%); }
+.bg-c { background: linear-gradient(142deg, #0D2010 0%, #081509 38%, var(--dark-3) 68%, #000 100%); }
+.bg-d { background: radial-gradient(circle at 44% 40%, #0F2512 0%, #081409 36%, var(--dark-5) 100%); }
+.bg-e { background: linear-gradient(168deg, #071009 0%, var(--dark-1) 44%, #010302 100%); }
 
 /* ── Top accent bar ── */
 .accent-bar {
   height: 6px;
   flex-shrink: 0;
   background: linear-gradient(to right,
-    transparent 0%, #10b981 22%, #34d399 50%, #10b981 78%, transparent 100%);
+    transparent 0%, var(--green-vivid) 22%,
+    var(--green-light) 50%,
+    var(--green-vivid) 78%, transparent 100%);
 }
 
 /* ── Decorative overlays ── */
@@ -82,52 +94,45 @@ body {
   pointer-events: none;
   z-index: 1;
 }
-/* Corner brackets */
 .deco::before, .deco::after {
   content: '';
   position: absolute;
   width: 84px;
   height: 84px;
-  border-color: rgba(52,211,153,.22);
+  border-color: rgba(24,200,96,.24);
   border-style: solid;
 }
 .deco::before { top: 52px; left: 52px; border-width: 2.5px 0 0 2.5px; }
 .deco::after  { bottom: 104px; right: 52px; border-width: 0 2.5px 2.5px 0; }
 
-/* Dot grid variant */
 .deco-dots {
-  background-image: radial-gradient(circle, rgba(52,211,153,.09) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(circle, rgba(24,200,96,.08) 1.5px, transparent 1.5px);
   background-size: 56px 56px;
 }
-
-/* Radial glow variant */
 .deco-glow {
-  background: radial-gradient(ellipse 70% 55% at 75% 20%, rgba(16,185,129,.11) 0%, transparent 70%);
+  background: radial-gradient(ellipse 70% 55% at 75% 20%, rgba(24,200,96,.13) 0%, transparent 70%);
 }
-
-/* Cross watermark */
 .deco-cross {
   background:
     linear-gradient(to bottom,
       transparent calc(50% - 1.5px),
-      rgba(16,185,129,.045) calc(50% - 1.5px),
-      rgba(16,185,129,.045) calc(50% + 1.5px),
+      rgba(24,200,96,.05) calc(50% - 1.5px),
+      rgba(24,200,96,.05) calc(50% + 1.5px),
       transparent calc(50% + 1.5px)),
     linear-gradient(to right,
       transparent calc(50% - 1.5px),
-      rgba(16,185,129,.045) calc(50% - 1.5px),
-      rgba(16,185,129,.045) calc(50% + 1.5px),
+      rgba(24,200,96,.05) calc(50% - 1.5px),
+      rgba(24,200,96,.05) calc(50% + 1.5px),
       transparent calc(50% + 1.5px));
 }
 
-/* Giant background quote mark */
 .bg-quote {
   position: absolute;
   z-index: 1;
   font-family: 'Playfair Display', serif;
   font-size: 620px;
   line-height: 1;
-  color: rgba(16,185,129,.038);
+  color: rgba(24,200,96,.04);
   top: -40px;
   left: -14px;
   font-weight: 800;
@@ -146,76 +151,69 @@ body {
   padding: 56px 100px 24px;
   overflow: hidden;
 }
-.body.left { align-items: flex-start; text-align: left; }
-.body.center { align-items: center; text-align: center; }
+.body.left   { align-items: flex-start; text-align: left; }
+.body.center { align-items: center;     text-align: center; }
 
-/* Eyebrow */
 .eyebrow {
   font-family: 'Inter', sans-serif;
   font-size: 17px;
   font-weight: 600;
   letter-spacing: 5.5px;
-  color: #34d399;
+  color: var(--green-light);
   text-transform: uppercase;
   margin-bottom: 24px;
   opacity: .88;
   flex-shrink: 0;
 }
 
-/* Divider rule */
 .rule {
   width: 58px;
   height: 2.5px;
-  background: linear-gradient(to right, transparent, #10b981, transparent);
+  background: linear-gradient(to right, transparent, var(--green-vivid), transparent);
   margin-bottom: 34px;
   flex-shrink: 0;
 }
 .center .rule { align-self: center; }
 
-/* Main statement */
 .stmt {
   font-family: 'Playfair Display', serif;
   font-weight: 800;
-  color: #fdfaf3;
+  color: var(--text-primary);
   line-height: 1.2;
   margin-bottom: 32px;
   flex-shrink: 0;
   word-break: break-word;
   overflow-wrap: break-word;
-  text-shadow: 0 3px 28px rgba(0,0,0,.6);
+  text-shadow: 0 3px 30px rgba(0,0,0,.7);
 }
-.stmt em { color: #34d399; font-style: italic; }
+.stmt em { color: var(--green-light); font-style: italic; }
 
-/* Font-size variants — px at 1080 design scale */
 .f-xl { font-size: 80px; }
 .f-lg { font-size: 70px; }
 .f-md { font-size: 60px; }
 .f-sm { font-size: 52px; }
 
-/* Scripture */
 .verse {
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex-shrink: 0;
 }
-
 .v-text {
   font-family: 'Inter', sans-serif;
   font-size: 23px;
   font-style: italic;
   font-weight: 400;
-  color: rgba(185,224,196,.8);
+  color: var(--text-verse);
   line-height: 1.55;
   word-break: break-word;
 }
-
 .v-ref {
   font-family: 'Cinzel', serif;
   font-size: 19px;
   font-weight: 700;
   letter-spacing: 4.5px;
-  color: #10b981;
+  color: var(--green-vivid);
   text-transform: uppercase;
   margin-top: 4px;
 }
@@ -230,47 +228,68 @@ body {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  border-top: 1px solid rgba(16,185,129,.15);
-  background: linear-gradient(to top, rgba(0,8,6,.96) 0%, rgba(0,8,6,.5) 100%);
+  border-top: 1px solid rgba(24,200,96,.18);
+  background: linear-gradient(to top, rgba(2,5,3,.97) 0%, rgba(2,5,3,.5) 100%);
   padding: 0 60px;
 }
-
 .brand-logo {
-  width: 52px;
-  height: 52px;
+  width: 52px; height: 52px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1.5px solid rgba(52,211,153,.35);
+  border: 1.5px solid rgba(24,200,96,.38);
   flex-shrink: 0;
 }
 .brand-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
 .brand-copy { display: flex; flex-direction: column; gap: 4px; }
 .brand-name {
   font-family: 'Cinzel', serif;
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 21px; font-weight: 700;
   letter-spacing: 5px;
-  color: #fdfaf3;
+  color: var(--text-primary);
   text-transform: uppercase;
 }
 .brand-url {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 15px; font-weight: 500;
   letter-spacing: 2px;
-  color: #34d399;
+  color: var(--green-vivid);
+}
+
+/* ── Caption block (below each post) ── */
+.caption {
+  width: min(calc(100vw - 32px), 1080px);
+  background: rgba(24,200,96,.05);
+  border: 1px solid rgba(24,200,96,.14);
+  border-radius: 10px;
+  padding: 20px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: -16px;
+}
+.caption-q {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  font-style: italic;
+  color: #C8EDD4;
+  line-height: 1.5;
+}
+.caption-tags {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.78rem, 2vw, 0.9rem);
+  color: var(--green-vivid);
+  letter-spacing: 0.03em;
+  line-height: 1.7;
 }
 </style>
 </head>
 <body>
 
 <h1 class="page-title">Watchman Counseling — Instagram Posts</h1>
-<p class="page-sub">20 posts · 1080 × 1080 px · Open in browser, screenshot each one</p>
+<p class="page-sub">20 posts · 1080 × 1080 px · Screenshot each post individually</p>
 
 
 <!-- ══════════════ POST 1 ══════════════ -->
-<div class="post-label">1 / 20</div>
 <div class="post bg-a">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -292,10 +311,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would you do today if anxiety didn't get a vote?</p>
+  <p class="caption-tags">#WatchmanCounseling #AnxietyRecovery #FaithOverFear #PeaceOfGod</p>
+</div>
 
 
 <!-- ══════════════ POST 2 ══════════════ -->
-<div class="post-label">2 / 20</div>
 <div class="post bg-b">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -316,10 +338,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">When did needing help become something to hide?</p>
+  <p class="caption-tags">#WatchmanCounseling #AskingForHelp #TherapyWorks #MentalHealthCourage</p>
+</div>
 
 
 <!-- ══════════════ POST 3 ══════════════ -->
-<div class="post-label">3 / 20</div>
 <div class="post bg-c">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -341,10 +366,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would your life look like if trauma stopped writing the story?</p>
+  <p class="caption-tags">#WatchmanCounseling #TraumaHealing #GraceHeals #YouAreMore</p>
+</div>
 
 
 <!-- ══════════════ POST 4 ══════════════ -->
-<div class="post-label">4 / 20</div>
 <div class="post bg-d">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -365,10 +393,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What are you afraid will fall apart if you finally stop?</p>
+  <p class="caption-tags">#WatchmanCounseling #RestIsHoly #BurnoutRecovery #SabbathRest</p>
+</div>
 
 
 <!-- ══════════════ POST 5 ══════════════ -->
-<div class="post-label">5 / 20</div>
 <div class="post bg-e">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -390,10 +421,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What truth are you holding onto when the darkness lies?</p>
+  <p class="caption-tags">#WatchmanCounseling #DepressionRecovery #YouAreNotAlone #GodIsClose</p>
+</div>
 
 
 <!-- ══════════════ POST 6 ══════════════ -->
-<div class="post-label">6 / 20</div>
 <div class="post bg-a">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -414,10 +448,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">Who told you that one mistake was the whole story?</p>
+  <p class="caption-tags">#WatchmanCounseling #IdentityInChrist #YouAreEnough #NoCondemnation</p>
+</div>
 
 
 <!-- ══════════════ POST 7 ══════════════ -->
-<div class="post-label">7 / 20</div>
 <div class="post bg-b">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -439,10 +476,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What are you sacrificing by never saying no?</p>
+  <p class="caption-tags">#WatchmanCounseling #HealthyBoundaries #GuardYourHeart #EmotionalHealth</p>
+</div>
 
 
 <!-- ══════════════ POST 8 ══════════════ -->
-<div class="post-label">8 / 20</div>
 <div class="post bg-c">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -463,10 +503,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What are you feeding your mind that you wouldn't feed your body?</p>
+  <p class="caption-tags">#WatchmanCounseling #RenewYourMind #PeaceOfGod #MentalHealthFaith</p>
+</div>
 
 
 <!-- ══════════════ POST 9 ══════════════ -->
-<div class="post-label">9 / 20</div>
 <div class="post bg-d">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -488,10 +531,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would it feel like to grieve without guilt?</p>
+  <p class="caption-tags">#WatchmanCounseling #GriefHealing #JesusWept #GriefSupport</p>
+</div>
 
 
 <!-- ══════════════ POST 10 ══════════════ -->
-<div class="post-label">10 / 20</div>
 <div class="post bg-e">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -512,10 +558,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What does your life look like on the other side of this?</p>
+  <p class="caption-tags">#WatchmanCounseling #SobrietyJourney #FreedomInChrist #RecoveryIsPossible</p>
+</div>
 
 
 <!-- ══════════════ POST 11 ══════════════ -->
-<div class="post-label">11 / 20</div>
 <div class="post bg-a">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -537,10 +586,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">Do you actually believe God sees you in your lowest moments?</p>
+  <p class="caption-tags">#WatchmanCounseling #YouAreSeen #GodSeesYou #NeverAlone</p>
+</div>
 
 
 <!-- ══════════════ POST 12 ══════════════ -->
-<div class="post-label">12 / 20</div>
 <div class="post bg-b">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -561,10 +613,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would change if you gave yourself permission to heal?</p>
+  <p class="caption-tags">#WatchmanCounseling #MensMentalHealth #MenHealToo #BreakTheStigma</p>
+</div>
 
 
 <!-- ══════════════ POST 13 ══════════════ -->
-<div class="post-label">13 / 20</div>
 <div class="post bg-c">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -586,10 +641,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">Are you performing for love — or are you finally receiving it?</p>
+  <p class="caption-tags">#WatchmanCounseling #GodLovesYou #UnconditionalLove #YouBelong</p>
+</div>
 
 
 <!-- ══════════════ POST 14 ══════════════ -->
-<div class="post-label">14 / 20</div>
 <div class="post bg-d">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -610,10 +668,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What is really underneath the anger?</p>
+  <p class="caption-tags">#WatchmanCounseling #AngerManagement #EmotionalHealth #HealthyEmotions</p>
+</div>
 
 
 <!-- ══════════════ POST 15 ══════════════ -->
-<div class="post-label">15 / 20</div>
 <div class="post bg-e">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -635,10 +696,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What chapter of your story are you afraid to keep reading?</p>
+  <p class="caption-tags">#WatchmanCounseling #HopeInChrist #YourStoryIsntOver #NeverGiveUp</p>
+</div>
 
 
 <!-- ══════════════ POST 16 ══════════════ -->
-<div class="post-label">16 / 20</div>
 <div class="post bg-a">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -659,10 +723,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would you pursue if fear wasn't in the driver's seat?</p>
+  <p class="caption-tags">#WatchmanCounseling #OvercomingFear #FaithOverFear #CourageInChrist</p>
+</div>
 
 
 <!-- ══════════════ POST 17 ══════════════ -->
-<div class="post-label">17 / 20</div>
 <div class="post bg-b">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -684,10 +751,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What is your anxiety trying to protect you from?</p>
+  <p class="caption-tags">#WatchmanCounseling #AnxietyAwareness #CastYourAnxiety #MentalHealthTips</p>
+</div>
 
 
 <!-- ══════════════ POST 18 ══════════════ -->
-<div class="post-label">18 / 20</div>
 <div class="post bg-c">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -708,10 +778,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">Who in your life doesn't know how heavy it's been?</p>
+  <p class="caption-tags">#WatchmanCounseling #YouAreNotAlone #BurdenShare #Community</p>
+</div>
 
 
 <!-- ══════════════ POST 19 ══════════════ -->
-<div class="post-label">19 / 20</div>
 <div class="post bg-d">
   <div class="deco deco-glow deco-cross"></div>
   <div class="bg-quote">"</div>
@@ -733,10 +806,13 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">Do you truly believe you are known — and still loved?</p>
+  <p class="caption-tags">#WatchmanCounseling #KnownByGod #CalledByName #YouAreMine</p>
+</div>
 
 
 <!-- ══════════════ POST 20 ══════════════ -->
-<div class="post-label">20 / 20</div>
 <div class="post bg-e">
   <div class="deco deco-dots"></div>
   <div class="accent-bar"></div>
@@ -757,11 +833,15 @@ body {
     </div>
   </div>
 </div>
+<div class="caption">
+  <p class="caption-q">What would healing feel like — and are you ready for it?</p>
+  <p class="caption-tags">#WatchmanCounseling #HealingJourney #WholenessInChrist #BodyAndSoul</p>
+</div>
 
 
 <script>
-  /* CSS `zoom` shrinks the element AND its layout footprint —
-     no wrappers, no position:absolute, no overlap possible.   */
+  /* CSS zoom scales the element AND its layout footprint —
+     posts stay sequential, never overlap on any device.     */
   function scalePosts() {
     var pad = 24;
     var available = Math.min(window.innerWidth - pad * 2, 1080);
