@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchman Counseling — Instagram Posts (4:5)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0c0a;
+            padding: 28px 20px 48px;
+        }
+
+        /* ── Page header ── */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #18C860;
+            margin-bottom: 6px;
+        }
+        .header p { color: #4b5563; font-size: 14px; }
+        .header .hint {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #374151;
+        }
+
+        /* ── Controls ── */
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .btn-download-all {
+            background: #18C860;
+            color: #030603;
+            padding: 11px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.03em;
+            transition: background 0.2s;
+        }
+        .btn-download-all:hover { background: #40E882; }
+
+        /* ── Grid ── */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ── Post card wrapper ── */
+        .post-wrap {
+            position: relative;
+        }
+        .post-wrap:hover .btn-download { opacity: 1; }
+
+        /* ── THE POST — 4:5 aspect ratio ── */
+        .post {
+            aspect-ratio: 4 / 5;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,.55);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            font-size: clamp(13px, 1.3vw, 18px); /* base for em scaling */
+        }
+        .post:hover { transform: translateY(-3px); }
+
+        /* ── Background variants (logo palette — near-black) ── */
+        .var-a { background: radial-gradient(ellipse 110% 90% at 50% 55%, #0C1F10 0%, #050D08 50%, #020505 100%); }
+        .var-b { background: linear-gradient(155deg, #091409 0%, #030A06 50%, #010302 100%); }
+        .var-c { background: linear-gradient(142deg, #0D2010 0%, #081509 40%, #030808 100%); }
+        .var-d { background: radial-gradient(circle at 42% 38%, #102214 0%, #081409 38%, #040D06 100%); }
+        .var-e { background: linear-gradient(168deg, #071009 0%, #050D08 44%, #010302 100%); }
+        .var-f { background: radial-gradient(ellipse 100% 80% at 60% 30%, #0E2212 0%, #050E07 50%, #020604 100%); }
+        .var-g { background: linear-gradient(200deg, #060E08 0%, #030807 50%, #010203 100%); }
+        .var-h { background: linear-gradient(120deg, #0A1C0C 0%, #060F08 45%, #020604 100%); }
+
+        /* ── Top accent line ── */
+        .accent-bar {
+            height: 5px;
+            flex-shrink: 0;
+            background: linear-gradient(to right,
+                transparent 0%, #18C860 20%,
+                #40E882 50%,
+                #18C860 80%, transparent 100%);
+        }
+
+        /* ── Deco corner brackets ── */
+        .deco {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .deco::before, .deco::after {
+            content: '';
+            position: absolute;
+            width: 10%;
+            height: 10%;
+            border-color: rgba(24,200,96,.22);
+            border-style: solid;
+        }
+        .deco::before { top: 8%; left: 6%; border-width: 2px 0 0 2px; }
+        .deco::after  { bottom: 12%; right: 6%; border-width: 0 2px 2px 0; }
+
+        /* ── Radial glow ── */
+        .glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(ellipse 65% 50% at 75% 15%, rgba(24,200,96,.11) 0%, transparent 70%);
+        }
+
+        /* ── Big background quote ── */
+        .bg-quote {
+            position: absolute;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 55%;  /* relative to post width via em cascade */
+            line-height: 1;
+            color: rgba(24,200,96,.035);
+            top: -5%;
+            left: -1%;
+            font-weight: 800;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* ── Post body ── */
+        .post-body {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6% 9% 3%;
+            overflow: hidden;
+        }
+        .post-body.left  { align-items: flex-start; text-align: left; }
+        .post-body.center { align-items: center; text-align: center; }
+
+        .eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68em;
+            font-weight: 600;
+            letter-spacing: 0.34em;
+            color: #40E882;
+            text-transform: uppercase;
+            margin-bottom: 0.9em;
+            opacity: .88;
+            flex-shrink: 0;
+        }
+        .rule {
+            width: 3.2em;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #18C860, transparent);
+            margin-bottom: 1.1em;
+            flex-shrink: 0;
+        }
+        .center .rule { align-self: center; }
+
+        .main-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.65em;
+            font-weight: 800;
+            color: #F6FBF7;
+            line-height: 1.25;
+            margin-bottom: 1em;
+            flex-shrink: 0;
+            text-shadow: 0 2px 20px rgba(0,0,0,.6);
+        }
+
+        .scripture-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45em;
+            flex-shrink: 0;
+        }
+        .scripture-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82em;
+            font-style: italic;
+            font-weight: 400;
+            color: rgba(155,230,170,.82);
+            line-height: 1.55;
+        }
+        .scripture-ref {
+            font-family: 'Cinzel', serif;
+            font-size: 0.68em;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: #18C860;
+            text-transform: uppercase;
+        }
+
+        /* ── Brand bar ── */
+        .brand-bar {
+            flex-shrink: 0;
+            position: relative;
+            z-index: 20;
+            height: 14%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9em;
+            border-top: 1px solid rgba(24,200,96,.16);
+            background: linear-gradient(to top, rgba(1,5,2,.97) 0%, rgba(1,5,2,.55) 100%);
+            padding: 0 8%;
+        }
+        .brand-icon {
+            width: 2.6em; height: 2.6em;
+            border-radius: 50%;
+            border: 1.5px solid rgba(24,200,96,.4);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            background: rgba(24,200,96,.08);
+        }
+        .brand-icon span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            font-weight: 700;
+            color: #18C860;
+            letter-spacing: 0.05em;
+        }
+        .brand-copy { display: flex; flex-direction: column; gap: 0.18em; }
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65em;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            color: #F6FBF7;
+            text-transform: uppercase;
+        }
+        .brand-url {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.56em;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: #18C860;
+        }
+
+        /* ── Per-card download button ── */
+        .btn-download {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            border-radius: 5px;
+            background: rgba(24,200,96,.18);
+            color: #40E882;
+            border: 1px solid rgba(24,200,96,.35);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            z-index: 30;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .btn-download { opacity: 0.75; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Watchman Counseling</h1>
+    <p>20 Mental Health + Scripture · Instagram Posts (4:5)</p>
+    <p class="hint">Hover a post → click Download, or use the button below for all 20</p>
+</div>
+
+<div class="controls">
+    <button class="btn-download-all" onclick="downloadAllPosts()">&#x2B07; Download All 20 Posts</button>
+</div>
+
+<div class="grid" id="postsGrid"></div>
+
+<script>
+const posts = [
+    {
+        category: "Healing · Progress",
+        text: "Healing isn't linear.\nYour progress isn't measured by perfection—\nit's measured by showing up.",
+        quote: '"Though a righteous man falls seven times,\nhe rises again."',
+        ref: "Proverbs 24:16",
+        bg: "var-a", align: "center"
+    },
+    {
+        category: "Anxiety · Identity",
+        text: "Your anxiety doesn't define you.\nWhat defines you is how you respond\nwhen anxiety arrives.",
+        quote: '"God gave us a spirit not of fear,\nbut of power, love, and self-control."',
+        ref: "2 Timothy 1:7",
+        bg: "var-b", align: "left"
+    },
+    {
+        category: "Courage · Growth",
+        text: "Therapy isn't weakness.\nIt's the courage to look at yourself honestly\nand choose growth.",
+        quote: '"The prudent see danger\nand take refuge."',
+        ref: "Proverbs 27:12",
+        bg: "var-c", align: "center"
+    },
+    {
+        category: "Rest · Self-Care",
+        text: "You don't have to earn the right to rest.\nRest is not laziness—\nit's maintenance.",
+        quote: '"Come to me, all who are weary,\nand I will give you rest."',
+        ref: "Matthew 11:28",
+        bg: "var-d", align: "left"
+    },
+    {
+        category: "Depression · Hope",
+        text: "Depression lies.\nIt tells you that you're broken.\nThe truth: you're human, and you're healing.",
+        quote: '"The Lord is close\nto the brokenhearted."',
+        ref: "Psalm 34:18",
+        bg: "var-e", align: "center"
+    },
+    {
+        category: "Boundaries · Peace",
+        text: "Boundaries aren't selfish.\nThey're the fence\nthat protects your peace.",
+        quote: '"A person without self-control\nis like a city with no walls."',
+        ref: "Proverbs 25:28",
+        bg: "var-f", align: "left"
+    },
+    {
+        category: "Identity · Future",
+        text: "Your past does not equal your future.\nYou get to write\nwhat comes next.",
+        quote: '"Forget the former things;\nI am doing a new thing."',
+        ref: "Isaiah 43:18–19",
+        bg: "var-a", align: "center"
+    },
+    {
+        category: "Community · Trust",
+        text: "Asking for help is not burden-laying.\nIt's trust-building.\nLet people in.",
+        quote: '"Carry each other\'s burdens."',
+        ref: "Galatians 6:2",
+        bg: "var-g", align: "left"
+    },
+    {
+        category: "Awareness · Growth",
+        text: "Your triggers are teachers.\nThey show you where\nyou still have work to do.",
+        quote: '"Consider it pure joy\nwhen you face trials of many kinds."',
+        ref: "James 1:2–3",
+        bg: "var-h", align: "center"
+    },
+    {
+        category: "Emotions · Insight",
+        text: "Emotions aren't problems to fix.\nThey're information\nto understand.",
+        quote: '"I praise you because\nI am fearfully and wonderfully made."',
+        ref: "Psalm 139:14",
+        bg: "var-b", align: "left"
+    },
+    {
+        category: "Forgiveness · Freedom",
+        text: "Forgiveness doesn't mean reconciliation.\nIt means you're no longer\npaying rent in your mind.",
+        quote: '"Bear with each other\nand forgive one another."',
+        ref: "Colossians 3:13",
+        bg: "var-d", align: "center"
+    },
+    {
+        category: "Growth · Change",
+        text: "You're allowed to outgrow people\nwho no longer fit your life.\nThat's not cruelty—that's growth.",
+        quote: '"Walk with the wise\nand become wise."',
+        ref: "Proverbs 13:20",
+        bg: "var-c", align: "left"
+    },
+    {
+        category: "Worth · Purpose",
+        text: "Your worth is not tied\nto your productivity.\nYou are enough, exactly as you are.",
+        quote: '"We are God\'s handiwork,\ncreated for good works."',
+        ref: "Ephesians 2:10",
+        bg: "var-e", align: "center"
+    },
+    {
+        category: "Grief · Healing",
+        text: "Grief is love\nwith nowhere to go.\nHonor your feelings—they matter.",
+        quote: '"Jesus wept."',
+        ref: "John 11:35",
+        bg: "var-a", align: "left"
+    },
+    {
+        category: "Shame · Healing",
+        text: "Shame thrives in silence.\nHealing begins when you speak\nyour truth out loud.",
+        quote: '"I confessed my sins,\nand you forgave me."',
+        ref: "Psalm 32:5",
+        bg: "var-f", align: "center"
+    },
+    {
+        category: "Healing · Compassion",
+        text: "You don't need to be fixed.\nYou need to be heard,\nunderstood, and believed.",
+        quote: '"Love one another\nwith brotherly affection."',
+        ref: "Romans 12:10",
+        bg: "var-g", align: "left"
+    },
+    {
+        category: "Mental Health · Faith",
+        text: "Mental health is not a luxury.\nIt's as essential\nas physical health.",
+        quote: '"I pray that you may\nenjoy good health."',
+        ref: "3 John 1:2",
+        bg: "var-h", align: "center"
+    },
+    {
+        category: "Progress · Faith",
+        text: "The smallest step forward\nis still progress.\nDon't wait for perfection to begin.",
+        quote: '"The Lord establishes\nyour steps."',
+        ref: "Proverbs 16:9",
+        bg: "var-b", align: "left"
+    },
+    {
+        category: "Resilience · Strength",
+        text: "You survived 100% of your worst days.\nYou have what it takes\nto survive this one too.",
+        quote: '"I can do all things\nthrough Christ who strengthens me."',
+        ref: "Philippians 4:13",
+        bg: "var-d", align: "center"
+    },
+    {
+        category: "Hope · Future",
+        text: "Your story isn't over.\nThe best chapters\nare still being written.",
+        quote: '"I have plans for you—\nplans for good, not for evil."',
+        ref: "Jeremiah 29:11",
+        bg: "var-c", align: "left"
+    }
+];
+
+function nl(str) {
+    return str.replace(/\n/g, '<br>');
+}
+
+function renderPosts() {
+    const grid = document.getElementById('postsGrid');
+    grid.innerHTML = posts.map((p, i) => `
+        <div class="post-wrap">
+            <div class="post ${p.bg}" id="post-${i}">
+                <div class="deco"></div>
+                <div class="glow"></div>
+                <div class="bg-quote">"</div>
+                <div class="accent-bar"></div>
+                <div class="post-body ${p.align}">
+                    <div class="eyebrow">${p.category}</div>
+                    <div class="rule"></div>
+                    <div class="main-text">${nl(p.text)}</div>
+                    <div class="scripture-block">
+                        <div class="scripture-quote">${nl(p.quote)}</div>
+                        <div class="scripture-ref">${p.ref}</div>
+                    </div>
+                </div>
+                <div class="brand-bar">
+                    <div class="brand-icon"><span>WC</span></div>
+                    <div class="brand-copy">
+                        <div class="brand-name">Watchman Counseling</div>
+                        <div class="brand-url">watchmancounseling.com</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-download" onclick="downloadPost(${i})">&#x2B07; Download</button>
+        </div>
+    `).join('');
+}
+
+async function downloadPost(index) {
+    await document.fonts.ready;
+
+    const el = document.getElementById('post-' + index);
+    const w  = el.offsetWidth;
+    const scale = Math.max(1, 1080 / w);
+
+    // Hide download button during capture
+    const btn = el.closest('.post-wrap').querySelector('.btn-download');
+    const prevOpacity = btn.style.opacity;
+    btn.style.opacity = '0';
+
+    const canvas = await html2canvas(el, {
+        backgroundColor: null,
+        scale: scale,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        width: w,
+        height: el.offsetHeight
+    });
+
+    btn.style.opacity = prevOpacity;
+
+    const link = document.createElement('a');
+    link.href   = canvas.toDataURL('image/png');
+    link.download = 'watchman-post-' + String(index + 1).padStart(2, '0') + '.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+async function downloadAllPosts() {
+    const btn = document.querySelector('.btn-download-all');
+    btn.textContent = 'Preparing…';
+    btn.disabled = true;
+
+    for (let i = 0; i < posts.length; i++) {
+        btn.textContent = `Downloading ${i + 1} / ${posts.length}…`;
+        await downloadPost(i);
+        await new Promise(r => setTimeout(r, 600));
+    }
+
+    btn.textContent = '✓ All 20 Downloaded';
+    setTimeout(() => {
+        btn.textContent = '⬇ Download All 20 Posts';
+        btn.disabled = false;
+    }, 3000);
+}
+
+renderPosts();
+</script>
+</body>
+</html>
