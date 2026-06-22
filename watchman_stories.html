@@ -360,12 +360,28 @@ async function downloadCard(index) {
     btn.style.opacity = '';
 
     const label = cards[index].title.toLowerCase().replace(/\s+/g, '-');
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = `watchman-story-${String(index + 1).padStart(2, '0')}-${label}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const filename = `watchman-story-${String(index + 1).padStart(2, '0')}-${label}.png`;
+    const dataURL = canvas.toDataURL('image/png');
+
+    // iOS Safari ignores the `download` attribute on data URIs — open in new tab instead
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (isIOS) {
+        const win = window.open('', '_blank');
+        win.document.write(`<!DOCTYPE html><html><head><title>${filename}</title></head>` +
+            `<body style="margin:0;background:#000;display:flex;justify-content:center;align-items:flex-start">` +
+            `<img src="${dataURL}" style="max-width:100%;height:auto">` +
+            `<p style="position:fixed;top:0;left:0;right:0;background:rgba(0,0,0,.75);color:#fff;` +
+            `font-family:sans-serif;font-size:14px;text-align:center;padding:10px 8px;margin:0">` +
+            `Press &amp; hold the image → <strong>Save to Photos</strong> or <strong>Save to Files</strong></p></body></html>`);
+        win.document.close();
+    } else {
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 }
 
 async function downloadAll() {
