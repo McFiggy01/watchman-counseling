@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchman Counseling — Instagram Story Cards</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f0f0f0;
+            padding: 28px 20px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .header h1 { font-size: 26px; color: #1a4d5c; margin-bottom: 6px; }
+        .header p  { color: #666; font-size: 14px; }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .btn-all {
+            background: #1a4d5c;
+            color: #fff;
+            padding: 11px 26px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn-all:hover { background: #0d2a32; }
+
+        /* ── Grid ── */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 28px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card-wrap {
+            position: relative;
+        }
+        .card-wrap:hover .btn-dl { opacity: 1; }
+
+        /* ── STORY CARD — 9:16 ── */
+        .card {
+            aspect-ratio: 9 / 16;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 36px rgba(0,0,0,.18);
+            cursor: pointer;
+            transition: transform 0.25s;
+            font-family: 'Inter', sans-serif;
+        }
+        .card:hover { transform: translateY(-3px); }
+
+        /* Two-tone background */
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+        }
+        .bg-left {
+            width: 26%;
+            background: #1a4d5c;
+            flex-shrink: 0;
+        }
+        .bg-right {
+            flex: 1;
+            background: #e8e4da;
+        }
+
+        /* White rounded content card */
+        .card-inner {
+            position: absolute;
+            top: 7%;
+            left: 8%;
+            right: 5%;
+            bottom: 7%;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 48px rgba(0,0,0,.13);
+            padding: 7% 8%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card-title {
+            font-size: 2.3em;
+            font-weight: 800;
+            color: #1a4d5c;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.15;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+
+        .card-rule {
+            width: 52px;
+            height: 3.5px;
+            background: #2a6e7e;
+            border-radius: 2px;
+            margin: 4% auto 5%;
+            flex-shrink: 0;
+        }
+
+        .card-body {
+            font-size: 1.1em;
+            color: #222;
+            line-height: 1.7;
+            flex: 1;
+            overflow: hidden;
+        }
+        .card-body p    { margin-bottom: 1em; }
+        .card-body p:last-child { margin-bottom: 0; }
+        .card-body b    { color: #1a4d5c; font-weight: 700; }
+        .card-body .bullet { display: block; margin-bottom: 0.55em; padding-left: 0.1em; }
+        .card-body .hotline-name { font-weight: 700; color: #1a4d5c; font-size: 1.05em; display: block; margin-top: 0.7em; }
+        .card-body .hotline-num  { font-weight: 500; color: #333; display: block; margin-top: 0.15em; margin-bottom: 0.1em; }
+        .card-body .note { font-size: 0.88em; color: #555; font-style: italic; margin-top: auto; padding-top: 0.8em; }
+
+        /* Logo / brand footer inside card */
+        .card-footer {
+            flex-shrink: 0;
+            margin-top: 5%;
+            padding-top: 4%;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 6%;
+        }
+        .card-footer-dot {
+            width: 2.6em; height: 2.6em;
+            border-radius: 50%;
+            background: #1a4d5c;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .card-footer-dot span {
+            color: #fff;
+            font-size: 0.72em;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+        .card-footer-text { display: flex; flex-direction: column; gap: 0.1em; }
+        .card-footer-name { font-size: 0.8em; font-weight: 700; color: #1a4d5c; }
+        .card-footer-url  { font-size: 0.7em; color: #2a6e7e; font-weight: 500; }
+
+        /* Per-card download button */
+        .btn-dl {
+            position: absolute;
+            bottom: 10px; right: 10px;
+            padding: 7px 16px;
+            background: #1a4d5c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.25s;
+            z-index: 20;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .btn-dl { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Watchman Counseling — Story Cards</h1>
+    <p>6 Instagram Story cards · 1080 × 1920 px (9:16) · Hover → Download</p>
+</div>
+
+<div class="controls">
+    <button class="btn-all" onclick="downloadAll()">📥 Download All 6 Story Cards</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const em = (n) => `${n}`;  // helper
+
+const cards = [
+
+/* ── 1. START HERE ── */
+{
+  title: "Start Here",
+  body: `
+    <p>Hi, I'm Hector 👋</p>
+    <p>I'm a <b>Licensed Master Social Worker (LMSW)</b> and the founder of <b>Watchman Counseling</b> — a faith-integrated therapy practice based in New York.</p>
+    <p><b>What to expect here:</b></p>
+    <span class="bullet">• Faith-based mental health education & encouragement</span>
+    <span class="bullet">• Scripture-informed insight on anxiety, depression & trauma</span>
+    <span class="bullet">• Men's emotional wellness & recovery content</span>
+    <span class="bullet">• Bilingual resources (English & Spanish)</span>
+    <span class="bullet">• Telehealth therapy info for NY residents</span>
+    <p class="note">This page is for education & encouragement, not therapy. Use the link in my bio to book a session. 🙏</p>
+  `
+},
+
+/* ── 2. DISCLAIMER ── */
+{
+  title: "Disclaimer",
+  body: `
+    <p>The content shared on this page is for <b>educational and informational purposes only</b> and does not constitute therapy, counseling, or mental health treatment.</p>
+    <p>I am a <b>Licensed Master Social Worker (LMSW)</b> licensed in New York State. I do not provide clinical services through this Instagram page.</p>
+    <p>Therapy services are available exclusively through individual sessions booked at <b>watchmancounseling.com</b>.</p>
+    <p>If you are in crisis, please call or text <b>988</b> or go to your nearest emergency room.</p>
+    <p class="note">LMSW #091675-1 · NPI #1801279963 · New York State</p>
+  `
+},
+
+/* ── 3. ABOUT YOUR THERAPIST ── */
+{
+  title: "About Your Therapist",
+  body: `
+    <p><b>Hector L. Figueroa, LMSW</b></p>
+    <p>Licensed Master Social Worker<br>LMSW #091675-1 · NPI #1801279963<br>New York State</p>
+    <p><b>Specializing in:</b></p>
+    <span class="bullet">• Cognitive Behavioral Therapy (CBT)</span>
+    <span class="bullet">• Trauma-Focused CBT (TF-CBT)</span>
+    <span class="bullet">• Addiction & Harm Reduction Counseling</span>
+    <span class="bullet">• Men's Mental Health & Emotional Wellness</span>
+    <span class="bullet">• Anxiety, Depression & Trauma</span>
+    <span class="bullet">• Faith-Integrated Therapy</span>
+    <p><b>Bilingual:</b> English & Spanish<br><b>Telehealth</b> available statewide across NY</p>
+  `
+},
+
+/* ── 4. SERVICES ── */
+{
+  title: "Services",
+  body: `
+    <p><b>What Watchman Counseling Offers:</b></p>
+    <span class="bullet">• Anxiety & Depression Therapy</span>
+    <span class="bullet">• Trauma Therapy (TF-CBT)</span>
+    <span class="bullet">• Addiction & Recovery Counseling</span>
+    <span class="bullet">• Men's Issues & Emotional Wellness</span>
+    <span class="bullet">• Faith-Integrated Counseling</span>
+    <span class="bullet">• Telehealth — All of New York State</span>
+    <span class="bullet">• Bilingual Sessions (English / Spanish)</span>
+    <p style="margin-top:1em"><b>Free 15-minute consultation available.</b></p>
+    <p>(914) 712-8283<br>watchmancounseling.com</p>
+  `
+},
+
+/* ── 5. NATIONAL HOTLINE RESOURCES ── */
+{
+  title: "National Hotline Resources",
+  body: `
+    <span class="hotline-name">National Suicide & Crisis Lifeline</span>
+    <span class="hotline-num">Call or Text 988</span>
+
+    <span class="hotline-name">Crisis Text Line</span>
+    <span class="hotline-num">Text HOME to 741741</span>
+
+    <span class="hotline-name">National Domestic Violence Hotline</span>
+    <span class="hotline-num">(800) 799-7233</span>
+
+    <span class="hotline-name">National Sexual Assault Hotline</span>
+    <span class="hotline-num">(800) 656-4673</span>
+
+    <span class="hotline-name">SAMHSA Substance Abuse Helpline</span>
+    <span class="hotline-num">(800) 662-4357</span>
+
+    <span class="hotline-name">Veterans Crisis Line</span>
+    <span class="hotline-num">Call 988, Press 1</span>
+
+    <span class="hotline-name">Childhelp Child Abuse Hotline</span>
+    <span class="hotline-num">(800) 422-4453</span>
+  `
+},
+
+/* ── 6. BOOK A SESSION ── */
+{
+  title: "Book a Session",
+  body: `
+    <p>Ready to start your healing journey?</p>
+    <p><b>Step 1</b><br>Book a free 15-minute consultation — no obligation, no pressure.</p>
+    <p><b>Step 2</b><br>We'll talk about your needs, goals, and what support looks like for you.</p>
+    <p><b>Step 3</b><br>Begin your personalized, faith-integrated therapy plan.</p>
+    <p>Accepting new clients via <b>telehealth</b> across all of New York State.</p>
+    <p><b>watchmancounseling.com</b><br>(914) 712-8283</p>
+    <p class="note">Bilingual sessions available · English & Spanish</p>
+  `
+}
+
+];
+
+function renderCards() {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = cards.map((c, i) => `
+        <div class="card-wrap">
+            <div class="card" id="card-${i}">
+                <div class="card-bg">
+                    <div class="bg-left"></div>
+                    <div class="bg-right"></div>
+                </div>
+                <div class="card-inner">
+                    <div class="card-title">${c.title}</div>
+                    <div class="card-rule"></div>
+                    <div class="card-body">${c.body}</div>
+                    <div class="card-footer">
+                        <div class="card-footer-dot"><span>WC</span></div>
+                        <div class="card-footer-text">
+                            <span class="card-footer-name">Watchman Counseling</span>
+                            <span class="card-footer-url">watchmancounseling.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-dl" onclick="downloadCard(${i})">📥 Download</button>
+        </div>
+    `).join('');
+}
+
+async function downloadCard(index) {
+    await document.fonts.ready;
+    const el = document.getElementById('card-' + index);
+    const w  = el.offsetWidth;
+    const scale = Math.max(1, 1080 / w);
+
+    const btn = el.closest('.card-wrap').querySelector('.btn-dl');
+    btn.style.opacity = '0';
+
+    const canvas = await html2canvas(el, {
+        backgroundColor: null,
+        scale: scale,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        width: w,
+        height: el.offsetHeight
+    });
+
+    btn.style.opacity = '';
+
+    const label = cards[index].title.toLowerCase().replace(/\s+/g, '-');
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = `watchman-story-${String(index + 1).padStart(2, '0')}-${label}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+async function downloadAll() {
+    const btn = document.querySelector('.btn-all');
+    btn.disabled = true;
+    for (let i = 0; i < cards.length; i++) {
+        btn.textContent = `Downloading ${i + 1} / ${cards.length}…`;
+        await downloadCard(i);
+        await new Promise(r => setTimeout(r, 700));
+    }
+    btn.textContent = '✓ All 6 Downloaded';
+    setTimeout(() => {
+        btn.textContent = '📥 Download All 6 Story Cards';
+        btn.disabled = false;
+    }, 3000);
+}
+
+renderCards();
+</script>
+</body>
+</html>
