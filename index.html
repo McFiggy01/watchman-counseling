@@ -358,6 +358,9 @@
   .underline-link { color: #064e3b; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
   .underline-link:hover { color: #10b981; }
 
+  /* Services marquee */
+  @keyframes svc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
   /* Testimonial marquee */
   .t-section { background: #f7f3e8; padding: 3.5rem 0 4rem; overflow: hidden; }
   .t-section .t-head { text-align: center; max-width: 42rem; margin: 0 auto 2rem; padding: 0 1.5rem; }
@@ -377,10 +380,38 @@
   @media (prefers-reduced-motion: reduce) { .t-track { animation: none; } }
 
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3YT65SHPS0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3YT65SHPS0');
+</script>
 </head>
 <body class="antialiased">
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:bg-forest focus:text-white focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+
+<!-- ─── AI Receptionist Banner ─── -->
+<div class="bg-forestDeep border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center gap-1.5 bg-sage/20 text-sage text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-sage animate-pulse inline-block"></span>
+        Live 24/7
+      </span>
+      <p class="text-white/80 text-sm">Have questions? Our AI receptionist answers calls anytime — even after hours.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4 text-sm shrink-0">
+      <span class="text-white/50 hidden sm:inline">Ask questions &middot; Book a consult &middot; Get FAQs</span>
+      <a href="tel:+19145064051" class="inline-flex items-center gap-2 bg-sage text-forestDeep font-bold px-4 py-2 rounded-md hover:brightness-105 transition whitespace-nowrap">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+        (914) 506-4051
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ─── Top nav ─── -->
 <header class="bg-forestDeep text-white">
@@ -396,8 +427,8 @@
       <a href="#about" class="hover:text-sage">About</a>
       <a href="#approach" class="hover:text-sage">Approach</a>
       <a href="#services" class="hover:text-sage">Services</a>
-      <a href="#faq" class="hover:text-sage">FAQ</a>
-      <a href="#book" class="hover:text-sage">Book</a>
+      <a href="blog.html" class="hover:text-sage">Blog</a>
+      <a href="books.html" class="hover:text-sage">Watchman Press</a>
     </nav>
     <a href="#book" class="hidden md:inline-flex bg-white text-forestDeep px-5 py-2.5 rounded-md font-medium hover:bg-sage transition">Book an Appointment</a>
   </div>
@@ -407,24 +438,18 @@
 
 <!-- ─── Hero ─── -->
 <section class="bg-sage relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 py-10 md:py-14 grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <h1 class="serif text-3xl md:text-4xl font-bold text-forestDeep leading-[1.1] tracking-tight">Heal Your Mind,<br/>Transform Your Life.</h1>
-      <p class="mt-4 text-sm text-ink/80 max-w-lg leading-relaxed">Evidence-based, judgment-free therapy with <strong>Hector L. Figueroa, LMSW</strong> — 20+ years helping people work through anxiety, depression, trauma, addiction, and the harder parts of being human.</p>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="#services" class="btn-primary">Explore Our Services</a>
-        <a href="#book" class="btn-ghost">Book a Consultation</a>
-      </div>
-      <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/70 uppercase tracking-wider">
-        <span>· LMSW #091675-1</span>
-        <span>· NPI #1801279963</span>
-        <span>· Bilingual (EN / ES)</span>
-        <span>· Telehealth · NY</span>
-      </div>
+  <div class="max-w-4xl mx-auto px-6 py-14 md:py-20 text-center">
+    <h1 class="serif text-4xl md:text-5xl font-bold text-forestDeep leading-[1.1] tracking-tight">Heal Your Mind,<br/>Transform Your Life.</h1>
+    <p class="mt-5 text-base text-ink/80 max-w-xl mx-auto leading-relaxed">Evidence-based, judgment-free therapy with <strong>Hector L. Figueroa, LMSW</strong> — 20+ years helping people work through anxiety, depression, trauma, addiction, and the harder parts of being human.</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="#services" class="btn-primary">Explore Our Services</a>
+      <a href="#book" class="btn-ghost">Book a Consultation</a>
     </div>
-    <div class="relative">
-      <img src="hector-headshot.jpg" alt="Hector L. Figueroa, LMSW — therapist at Watchman Counseling" class="rounded-md aspect-[4/5] object-cover w-full max-w-md ml-auto shadow-xl" loading="eager" />
-      <div class="absolute -bottom-6 -left-6 hidden md:block petal opacity-30"></div>
+    <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-ink/70 uppercase tracking-wider">
+      <span>· LMSW #091675-1</span>
+      <span>· NPI #1801279963</span>
+      <span>· Bilingual (EN / ES)</span>
+      <span>· Telehealth · NY</span>
     </div>
   </div>
   <div class="petal absolute -bottom-12 left-1/2 -translate-x-1/2 opacity-90"></div>
@@ -479,55 +504,89 @@
 </section>
 
 <!-- ─── Services ─── -->
-<section id="services" class="bg-sage/40">
-  <div class="max-w-7xl mx-auto px-6 py-10 md:py-14">
-    <div class="text-center max-w-2xl mx-auto mb-14">
-      <div class="text-sm tracking-[0.3em] uppercase text-forest mb-4">Our Services</div>
-      <h2 class="serif text-2xl md:text-3xl font-semibold text-forestDeep leading-tight">Comprehensive Care for Every Stage of Your Journey</h2>
-      <p class="mt-5 text-ink/70 leading-relaxed">A range of services designed for the unique needs of every individual. Emotional challenges, life transitions, or simply wanting to feel more like yourself again — there's a starting point here.</p>
-    </div>
-    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+<section id="services" class="bg-sage/40 overflow-hidden py-10 md:py-14">
+  <div class="text-center max-w-2xl mx-auto mb-10 px-6">
+    <div class="text-sm tracking-[0.3em] uppercase text-forest mb-4">Our Services</div>
+    <h2 class="serif text-2xl md:text-3xl font-semibold text-forestDeep leading-tight">Comprehensive Care for Every Stage of Your Journey</h2>
+    <p class="mt-5 text-ink/70 leading-relaxed">A range of services designed for the unique needs of every individual. Emotional challenges, life transitions, or simply wanting to feel more like yourself again — there's a starting point here.</p>
+  </div>
+  <div style="mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);">
+    <div style="display:flex; gap:1rem; width:max-content; animation:svc-scroll 40s linear infinite; padding:0.5rem 0 1rem;">
 
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <!-- set 1 -->
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Individual Therapy</h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">One-on-one sessions for anxiety, depression, trauma, addiction, and life transitions. CBT-led, paced to you.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
-
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Couples Counseling</h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">Communication breakdowns, trust repair, recurring fights — practical work for couples ready to do it.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
-
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Men's Issues</h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">A signature area. Anger, fatherhood, purpose, the parts most men were never taught to talk about.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
-
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Addiction &amp; Recovery</h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">Harm-reduction-aware. Years inside OASAS-licensed clinics — no judgment, real tools.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
-
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Teens &amp; Young Adults</h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">Identity, school stress, family conflict, big-life pivots. I work the system, not just the kid.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
-
-      <div class="bg-white rounded-lg p-5 border border-line hover:border-forest transition">
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
         <div class="petal scale-[0.7] mb-5"></div>
         <h3 class="serif text-base font-semibold text-forestDeep">Faith-Integrated <span class="text-inkSoft text-base font-normal italic block">on request</span></h3>
         <p class="mt-3 text-ink/75 text-sm leading-relaxed">For clients who want their faith woven in. Chaplain-trained, optional — never the default.</p>
-        <a href="#book" class="underline-link mt-5 inline-block text-sm">Learn More</a>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+
+      <!-- set 2 (duplicate for seamless loop) -->
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Individual Therapy</h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">One-on-one sessions for anxiety, depression, trauma, addiction, and life transitions. CBT-led, paced to you.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Couples Counseling</h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">Communication breakdowns, trust repair, recurring fights — practical work for couples ready to do it.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Men's Issues</h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">A signature area. Anger, fatherhood, purpose, the parts most men were never taught to talk about.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Addiction &amp; Recovery</h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">Harm-reduction-aware. Years inside OASAS-licensed clinics — no judgment, real tools.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Teens &amp; Young Adults</h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">Identity, school stress, family conflict, big-life pivots. I work the system, not just the kid.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+      </div>
+      <div class="bg-white rounded-lg p-5 border border-line" style="width:260px; flex-shrink:0;">
+        <div class="petal scale-[0.7] mb-5"></div>
+        <h3 class="serif text-base font-semibold text-forestDeep">Faith-Integrated <span class="text-inkSoft text-base font-normal italic block">on request</span></h3>
+        <p class="mt-3 text-ink/75 text-sm leading-relaxed">For clients who want their faith woven in. Chaplain-trained, optional — never the default.</p>
+        <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
       </div>
 
     </div>
@@ -633,6 +692,52 @@
         </article>
         <article class="t-card">
           <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Great counselor. Really listens and provides feedback and tools that actually work. Highly recommended!</p>
+          <div class="t-meta"><span class="t-name">— Brian G.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector Figueroa helped me through some of the hardest moments of my life. During a time when I was struggling deeply and felt hopeless, he supported me with patience, understanding, and compassion. I have made so much progress and grown into a stronger and healthier person.</p>
+          <div class="t-meta"><span class="t-name">— Hasina S.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector is very amazing! I have had him for nearly 2 years now, and I genuinely couldn't ask for a better therapist!</p>
+          <div class="t-meta"><span class="t-name">— DT Badley</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">I have been going to Hector Figueroa now for several months. He is very professional and has helped me tremendously with the issues I have been dealing with.</p>
+          <div class="t-meta"><span class="t-name">— Jonah H.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector is compassionate, faith filled and devoted to The Bible. He is kind and genuine, but also firm when conviction is provided by The Holy Spirit. He wants the best for his clients and follows Jesus with reverence. I recommend him wholeheartedly.</p>
+          <div class="t-meta"><span class="t-name">— Laura R. Stewart</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector has very good insight on what he does. He is genuinely caring and patient. He has a warmth about him. He listens, he engages and is very helpful.</p>
+          <div class="t-meta"><span class="t-name">— Richard A.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">My therapist Hector Figueroa is the best therapist I ever had.</p>
+          <div class="t-meta"><span class="t-name">— Kemraj P.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">I have been with a lot of therapists. Hector came highly recommended so I thought I would give him a shot. I was extremely impressed with his professionalism and how he seemed to really care about my issues. Very down to earth and made me feel very comfortable.</p>
+          <div class="t-meta"><span class="t-name">— Izzy F.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">With a genuine understanding of the various stages and challenges of life, Hector approaches every conversation with compassion and a non-judgmental approach. He has my full confidence as a therapist.</p>
+          <div class="t-meta"><span class="t-name">— Rev. Justo R.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <!-- duplicate set starts -->
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <p class="t-quote">There are not enough words to say how amazing it is to work with Hector. Everyone who's ever been in therapy knows how frustrating it can be when you don't feel heard. Hector is extremely invested in you and pushes you to dig deep…</p>
           <div class="t-meta"><span class="t-name">— Jonna F.</span><span class="t-date">Google Review · 2025</span></div>
         </article>
@@ -691,10 +796,78 @@
           <p class="t-quote">Hector provided me with some truly valuable ideas. Great dude.</p>
           <div class="t-meta"><span class="t-name">— Aaron D.</span><span class="t-date">Google Review · 2025</span></div>
         </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Great counselor. Really listens and provides feedback and tools that actually work. Highly recommended!</p>
+          <div class="t-meta"><span class="t-name">— Brian G.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector Figueroa helped me through some of the hardest moments of my life. During a time when I was struggling deeply and felt hopeless, he supported me with patience, understanding, and compassion. I have made so much progress and grown into a stronger and healthier person.</p>
+          <div class="t-meta"><span class="t-name">— Hasina S.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector is very amazing! I have had him for nearly 2 years now, and I genuinely couldn't ask for a better therapist!</p>
+          <div class="t-meta"><span class="t-name">— DT Badley</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">I have been going to Hector Figueroa now for several months. He is very professional and has helped me tremendously with the issues I have been dealing with.</p>
+          <div class="t-meta"><span class="t-name">— Jonah H.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector is compassionate, faith filled and devoted to The Bible. He is kind and genuine, but also firm when conviction is provided by The Holy Spirit. He wants the best for his clients and follows Jesus with reverence. I recommend him wholeheartedly.</p>
+          <div class="t-meta"><span class="t-name">— Laura R. Stewart</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">Hector has very good insight on what he does. He is genuinely caring and patient. He has a warmth about him. He listens, he engages and is very helpful.</p>
+          <div class="t-meta"><span class="t-name">— Richard A.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">My therapist Hector Figueroa is the best therapist I ever had.</p>
+          <div class="t-meta"><span class="t-name">— Kemraj P.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">I have been with a lot of therapists. Hector came highly recommended so I thought I would give him a shot. I was extremely impressed with his professionalism and how he seemed to really care about my issues. Very down to earth and made me feel very comfortable.</p>
+          <div class="t-meta"><span class="t-name">— Izzy F.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
+        <article class="t-card">
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-quote">With a genuine understanding of the various stages and challenges of life, Hector approaches every conversation with compassion and a non-judgmental approach. He has my full confidence as a therapist.</p>
+          <div class="t-meta"><span class="t-name">— Rev. Justo R.</span><span class="t-date">Google Review · 2026</span></div>
+        </article>
     </div>
   </div>
-  <div style="text-align:center; margin-top:1.5rem; font-size:0.8rem; color:#64748b;">
-    <a href="https://www.google.com/maps/place/aptihealth/@42.7462195,-75.7700406,7z/data=!4m6!3m5!1s0x89e37a7ff3f00001:0x4ab20251466826d9!8m2!3d42.7462195!4d-75.7700406" target="_blank" rel="noopener" style="color:#064e3b; text-decoration: underline; text-underline-offset: 2px;">Read more reviews on Google →</a>
+  <div style="text-align:center; margin-top:2rem; padding: 0 1.5rem 0.5rem;">
+    <div style="display:inline-flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:1rem; padding:1rem 1.5rem; box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span style="color:#f59e0b; font-size:1rem; letter-spacing:0.05em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span style="font-weight:700; color:#022c22; font-size:0.95rem;">5.0</span>
+        <span style="color:#64748b; font-size:0.82rem;">on Google</span>
+      </div>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+        <a href="https://www.google.com/search?q=Watchman+Counseling" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex; align-items:center; gap:0.4rem; color:#064e3b; font-size:0.82rem; font-weight:600; text-decoration:underline; text-underline-offset:2px;">
+          Read Reviews →
+        </a>
+        <span style="color:#e5e7eb;">|</span>
+        <a href="https://g.page/r/CWLJZZIuLz4YEBM/review" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex; align-items:center; gap:0.4rem; color:#064e3b; font-size:0.82rem; font-weight:600; text-decoration:underline; text-underline-offset:2px;">
+          Leave a Review →
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -725,76 +898,6 @@
   </div>
 </section>
 
-<!-- ─── FAQ ─── -->
-<section id="faq" class="bg-sage/40">
-  <div class="max-w-3xl mx-auto px-6 py-8 md:py-12">
-    <div class="text-center mb-12">
-      <div class="text-sm tracking-[0.3em] uppercase text-forest mb-4">FAQ</div>
-      <h2 class="serif text-2xl md:text-3xl font-semibold text-forestDeep leading-tight">Common Questions</h2>
-      <p class="mt-4 text-ink/70">Got one not on the list? The chat in the corner is there 24/7.</p>
-    </div>
-    <div class="space-y-3">
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">How much does therapy cost?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">Self-pay rates and any sliding scale availability are discussed during the free 15-minute consult. I work out-of-network and provide superbills you can submit to your insurance for possible reimbursement.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">Do you take insurance?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">I'm out-of-network. Many PPO plans reimburse a portion of out-of-network mental health visits — I provide superbills (itemized receipts with diagnosis and CPT codes) so you can file for reimbursement.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">Where are sessions held?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">Telehealth via secure, HIPAA-compliant video. I'm licensed in New York State, so clients must be physically located in NY at the time of each session.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">Do you speak Spanish?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">Yes. Bilingual and bicultural — sessions can run fully in English, fully in Spanish, or a mix.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">Is this Christian counseling?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">Faith-integrated counseling is available on request — I'm a Chaplain with the NY State Chaplains Task-Force. By default, sessions are clinical and faith-neutral unless you ask for it.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">What's the cancellation policy?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">24-hour notice to reschedule or cancel. Late cancels and no-shows are charged the full session fee.</p>
-      </details>
-
-      <details class="bg-white rounded-md p-4 border border-line text-sm">
-        <summary class="flex items-center justify-between gap-4">
-          <span class="font-semibold text-forestDeep">I'm in crisis right now — can you help?</span>
-          <svg class="chev w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="mt-4 text-ink/75 text-sm leading-relaxed">Watchman Counseling is not an emergency service. If you're in immediate danger or thinking about hurting yourself, call <strong class="text-forestDeep">988</strong> (Suicide &amp; Crisis Lifeline) or <strong class="text-forestDeep">911</strong> right now — or go to your nearest ER. Once you're safe, come back and book a consult.</p>
-      </details>
-
-    </div>
-  </div>
-</section>
-
 <!-- ─── Booking ─── -->
 <section id="book" class="bg-sage">
   <div class="max-w-4xl mx-auto px-6 py-10 md:py-14 text-center">
@@ -813,7 +916,31 @@
     </div>
 
     <div class="mt-8 text-sm text-ink/70">
-      Prefer to call? <a class="underline-link" href="tel:+19147128283">(914) 712-8283</a> — leave a message, Hector returns calls within one business day.
+      Prefer to call? <a class="underline-link" href="tel:+19145064051">(914) 506-4051</a> — our AI receptionist answers 24/7 and can schedule your consult right now.
+    </div>
+  </div>
+</section>
+
+<!-- ─── Email Signup ─── -->
+<section class="bg-sage">
+  <div class="max-w-2xl mx-auto px-6 py-14 text-center">
+    <div class="text-xs tracking-[0.3em] uppercase text-forest mb-3">Stay Connected</div>
+    <h2 class="serif text-3xl font-bold text-forestDeep leading-tight">Get Wellness Insights in Your Inbox</h2>
+    <p class="mt-3 text-ink/70 text-sm max-w-md mx-auto">Practical tips on mental health, relationships, and resilience. No spam. Unsubscribe anytime.</p>
+    <div class="mt-8 max-w-md mx-auto">
+      <form action="https://salembreath.us9.list-manage.com/subscribe/post-json?u=9353b6670d0f81e74ca5767f3&amp;id=814de0b424&amp;f_id=00f908e1f0" method="post" novalidate id="wc-subscribe-form">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input type="email" name="EMAIL" placeholder="Your email address" required
+            class="flex-1 px-4 py-3 rounded-md border border-forest/30 bg-white text-ink text-sm focus:outline-none focus:ring-2 focus:ring-forest" />
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_9353b6670d0f81e74ca5767f3_d60dcce4a6" tabindex="-1" value="">
+          </div>
+          <button type="submit" name="subscribe"
+            class="bg-forestDeep text-white px-6 py-3 rounded-md text-sm font-semibold hover:bg-forest transition whitespace-nowrap">
+            Subscribe
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -828,6 +955,12 @@
       </div>
       <p class="text-white/70 max-w-md leading-relaxed">Compassionate, confidential, evidence-based therapy for individuals, couples, and families. Telehealth across New York State.</p>
       <p class="mt-4 text-white/60 text-xs">Hector L. Figueroa, LMSW · NY License #091675-1 · NPI #1801279963</p>
+      <div class="mt-4">
+        <!-- Professional verification provided by Psychology Today -->
+        <a href="https://www.psychologytoday.com/profile/926003" class="sx-verified-seal"></a>
+        <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="13" data-id="926003" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzkyNjAwMz9jYWxsYmFjaz1zeGNhbGxiYWNr"></script>
+        <!-- End Verification -->
+      </div>
     </div>
     <div>
       <div class="text-xs tracking-[0.2em] uppercase text-sage mb-4">Quick Links</div>
@@ -835,14 +968,14 @@
         <li><a href="#about" class="hover:text-sage">About</a></li>
         <li><a href="#approach" class="hover:text-sage">Approach</a></li>
         <li><a href="#services" class="hover:text-sage">Services</a></li>
-        <li><a href="#faq" class="hover:text-sage">FAQ</a></li>
+        <li><a href="blog.html" class="hover:text-sage">Blog</a></li>
         <li><a href="#book" class="hover:text-sage">Book a Consult</a></li>
       </ul>
     </div>
     <div>
       <div class="text-xs tracking-[0.2em] uppercase text-sage mb-4">Contact</div>
       <ul class="space-y-2 text-white/80">
-        <li><a href="tel:+19147128283" class="hover:text-sage">(914) 712-8283</a></li>
+        <li><a href="tel:+19145064051" class="hover:text-sage">(914) 506-4051</a></li>
         <li><a href="mailto:hello@watchmancounseling.com" class="hover:text-sage break-all">hello@watchmancounseling.com</a></li>
         <li class="text-white/60 text-xs pt-2">Telehealth across NY State</li>
       </ul>
@@ -891,6 +1024,51 @@
     }
     v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
   })(document, 'script');
+</script>
+
+<script>
+(function() {
+  var form = document.getElementById('wc-subscribe-form');
+  if (!form) return;
+  var msgBox = document.createElement('div');
+  msgBox.id = 'wc-subscribe-msg';
+  msgBox.style.cssText = 'display:none;margin-top:12px;text-align:center;font-size:0.9rem;font-weight:600;';
+  form.parentNode.insertBefore(msgBox, form.nextSibling);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var url = form.action.replace('/post-json?', '/post-json?') + '&c=wcMcCallback';
+    var email = encodeURIComponent(form.querySelector('input[name="EMAIL"]').value);
+    url += '&EMAIL=' + email;
+
+    window.wcMcCallback = function(resp) {
+      msgBox.style.display = 'block';
+      if (resp.result === 'success') {
+        form.style.display = 'none';
+        msgBox.style.color = '#064e3b';
+        msgBox.textContent = 'You\'re in! Check your inbox to confirm your subscription.';
+      } else {
+        var msg = resp.msg ? resp.msg.replace(/^\d+ - /, '') : 'Something went wrong. Please try again.';
+        if (msg.indexOf('already subscribed') !== -1) {
+          form.style.display = 'none';
+          msgBox.style.color = '#064e3b';
+          msgBox.textContent = 'You\'re already on the list!';
+        } else {
+          msgBox.style.color = '#b91c1c';
+          msgBox.textContent = msg;
+        }
+      }
+      var s = document.getElementById('wc-mc-script');
+      if (s) s.parentNode.removeChild(s);
+      delete window.wcMcCallback;
+    };
+
+    var script = document.createElement('script');
+    script.id = 'wc-mc-script';
+    script.src = url;
+    document.body.appendChild(script);
+  });
+})();
 </script>
 </body>
 </html>

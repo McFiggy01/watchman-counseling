@@ -1,0 +1,34 @@
+# Claude / internal working files
+.claude/
+memory/
+.tail.html
+.tail1.html
+.tail2.html
+.tail3.html
+
+# Project docs (not for the live site)
+ai_studio_prompt.md
+brief.md
+cal_com_setup.md
+chatbot_system_prompt.md
+voice_agent_system_prompt.md
+voiceflow_knowledge_base.txt
+PROJECT_HANDOFF.md
+
+# Other Watchman projects (not counseling site)
+watchman-press.html
+"Watchman Press Logo.png"
+"Watchman Press Logo 2.png"
+covers/
+
+# Dev previews / scratch
+landing_preview.html
+landing_preview_dark.html
+books.html
+email-signature.html
+
+# Archives
+files.zip
+files2.zip
+files/
+files2/
