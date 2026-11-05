@@ -34,6 +34,11 @@
   .sources { border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem; }
   .sources p { font-size:0.8rem;color:#475569;margin-bottom:.4rem; }
   .sources a { color:#064e3b;text-decoration:underline; }
+  html { scroll-behavior: smooth; }
+  header.wc-sticky { position:fixed; top:0; left:0; right:0; z-index:100; transform:translateY(-100%); transition:transform .35s cubic-bezier(.4,0,.2,1), box-shadow .3s; box-shadow:0 2px 24px rgba(2,44,34,.3); }
+  header.wc-sticky.wc-sticky-show { transform:translateY(0); }
+  #wc-nav-spacer { display:none; }
+  #wc-nav-spacer.active { display:block; }
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YT65SHPS0"></script>
 <script>
@@ -72,11 +77,14 @@
       <a href="../index.html#about" class="hover:text-sage">About</a>
       <a href="../index.html#services" class="hover:text-sage">Services</a>
       <a href="../blog.html" class="text-sage font-semibold">Blog</a>
-      <a href="../books.html" class="hover:text-sage">Watchman Press</a>
     </nav>
-    <a href="../index.html#book" class="hidden md:inline-flex bg-white text-forestDeep px-5 py-2.5 rounded-md font-medium hover:bg-sage transition">Book an Appointment</a>
+    <a href="../index.html#book" class="hidden md:inline-flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-full font-semibold hover:opacity-90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+        Book an Appointment
+      </a>
   </div>
 </header>
+<div id="wc-nav-spacer"></div>
 
 <main class="max-w-2xl mx-auto px-6 py-12 md:py-16">
 
@@ -285,5 +293,58 @@
   })(document, 'script');
 </script>
 
+
+<!-- ─── Sticky nav ─── -->
+<script>
+(function(){
+  var header = document.querySelector('header');
+  var spacer = document.getElementById('wc-nav-spacer');
+  var banner = document.querySelector('.bg-forestDeep.border-b');
+  var triggerY = (banner ? banner.offsetHeight : 0) + header.offsetHeight;
+  var stuck = false;
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > triggerY) {
+      if (!stuck) {
+        stuck = true;
+        spacer.style.height = header.offsetHeight + 'px';
+        spacer.classList.add('active');
+        header.classList.add('wc-sticky');
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){
+          header.classList.add('wc-sticky-show');
+        }); });
+      }
+    } else {
+      if (stuck) {
+        stuck = false;
+        header.classList.remove('wc-sticky-show');
+        header.classList.remove('wc-sticky');
+        spacer.classList.remove('active');
+      }
+    }
+  }, {passive:true});
+})();
+</script>
+
+<!-- ─── Floating CTA ─── -->
+<a id="floating-cta" href="../index.html#book"
+   style="position:fixed;bottom:1.5rem;left:1.5rem;z-index:50;display:inline-flex;align-items:center;gap:0.5rem;background:#10b981;color:#fff;padding:0.65rem 1.25rem;border-radius:9999px;font-weight:600;font-size:0.875rem;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(16,185,129,0.4);text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,box-shadow .2s ease;pointer-events:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+  Book a Free Consult
+</a>
+<script>
+(function(){
+  var btn = document.getElementById('floating-cta');
+  var hero = document.querySelector('section');
+  function onScroll(){
+    var show = window.scrollY > (hero ? hero.offsetHeight * 0.6 : 300);
+    btn.style.opacity = show ? '1' : '0';
+    btn.style.transform = show ? 'translateY(0)' : 'translateY(12px)';
+    btn.style.pointerEvents = show ? 'auto' : 'none';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  btn.addEventListener('mouseenter', function(){ this.style.boxShadow='0 6px 20px rgba(16,185,129,0.55)'; });
+  btn.addEventListener('mouseleave', function(){ this.style.boxShadow='0 4px 14px rgba(16,185,129,0.4)'; });
+})();
+</script>
 </body>
 </html>
