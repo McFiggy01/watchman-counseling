@@ -913,15 +913,15 @@
     <h2 class="serif text-2xl md:text-4xl font-semibold text-forestDeep leading-tight">Prioritize Your Mental Health</h2>
     <p class="mt-5 text-ink/80 text-lg max-w-xl mx-auto">No commitment. We talk for 15 minutes — what you're dealing with, what kind of support helps, whether I'm the right fit. If I'm not, I'll point you to someone who is.</p>
 
-    <div class="mt-10 bg-white rounded-md p-6 md:p-8 text-left shadow-md border border-line">
-      <div id="cal-embed" class="min-h-[420px] flex items-center justify-center text-inkSoft text-sm">
-        <div class="text-center">
-          <div class="text-xs tracking-[0.2em] uppercase text-forest mb-2">Cal.com embed slot</div>
-          <p class="max-w-md text-ink/70">Once you create the <strong class="text-forestDeep">"Therapy Consultation (15 min)"</strong> event in Cal.com, the live calendar loads here.</p>
-          <a class="btn-primary mt-6" href="https://cal.com/watchmanstudio/therapy-consultation" target="_blank" rel="noopener">Book a Free Consult →</a>
-        </div>
-      </div>
+    <div class="mt-10 bg-white rounded-xl overflow-hidden shadow-md border border-line">
+      <div id="cal-inline" style="min-height:600px;width:100%;"></div>
     </div>
+<script type="text/javascript">
+(function(C,A,L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,[L,namespace,api]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
+Cal("init",{origin:"https://cal.com"});
+Cal("inline",{elementOrSelector:"#cal-inline",calLink:"watchmanstudio/discovery-call",layout:"month_view"});
+Cal("ui",{"styles":{"branding":{"brandColor":"#064e3b"}},"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
 
     <div class="mt-8 text-sm text-ink/70">
       Prefer to call? <a class="underline-link" href="tel:+19145064051">(914) 506-4051</a> — our AI receptionist answers 24/7 and can schedule your consult right now.
