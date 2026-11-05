@@ -331,6 +331,10 @@
 
 <style>
   html { scroll-behavior: smooth; }
+  header.wc-sticky { position:fixed; top:0; left:0; right:0; z-index:100; transform:translateY(-100%); transition:transform .35s cubic-bezier(.4,0,.2,1), box-shadow .3s; box-shadow:0 2px 24px rgba(2,44,34,.3); }
+  header.wc-sticky.wc-sticky-show { transform:translateY(0); }
+  #wc-nav-spacer { display:none; }
+  #wc-nav-spacer.active { display:block; }
   body { background-color: #fdfaf3; color: #1f2937; font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.55; }
   h1, h2, h3, .serif { font-family: 'Playfair Display', Georgia, serif; }
   .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding: .7rem 1.25rem; border-radius: 6px; background: #064e3b; color: #fff; font-weight: 500; transition: all .2s ease; letter-spacing: 0.01em; }
@@ -436,6 +440,7 @@
       </a>
   </div>
 </header>
+<div id="wc-nav-spacer"></div>
 
 <main id="main">
 
@@ -1073,6 +1078,37 @@
   });
 })();
 </script>
+<!-- ─── Sticky nav ─── -->
+<script>
+(function(){
+  var header = document.querySelector('header');
+  var spacer = document.getElementById('wc-nav-spacer');
+  var banner = document.querySelector('.bg-forestDeep.border-b');
+  var triggerY = (banner ? banner.offsetHeight : 0) + header.offsetHeight;
+  var stuck = false;
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > triggerY) {
+      if (!stuck) {
+        stuck = true;
+        spacer.style.height = header.offsetHeight + 'px';
+        spacer.classList.add('active');
+        header.classList.add('wc-sticky');
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){
+          header.classList.add('wc-sticky-show');
+        }); });
+      }
+    } else {
+      if (stuck) {
+        stuck = false;
+        header.classList.remove('wc-sticky-show');
+        header.classList.remove('wc-sticky');
+        spacer.classList.remove('active');
+      }
+    }
+  }, {passive:true});
+})();
+</script>
+
 <!-- ─── Floating CTA ─── -->
 <a id="floating-cta" href="#book"
    style="position:fixed;bottom:1.5rem;left:1.5rem;z-index:50;display:inline-flex;align-items:center;gap:0.5rem;background:#10b981;color:#fff;padding:0.65rem 1.25rem;border-radius:9999px;font-weight:600;font-size:0.875rem;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(16,185,129,0.4);text-decoration:none;opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,box-shadow .2s ease;pointer-events:none;">
