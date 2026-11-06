@@ -97,6 +97,19 @@
 
   <!-- ══ ADD NEW POST CARDS ABOVE THIS LINE ══ -->
 
+  <!-- Post — Seasonal Depression -->
+  <article class="bg-white border border-line rounded-xl p-6 md:p-8 mb-6 hover:border-forest transition">
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="text-[11px] font-bold tracking-widest uppercase text-white bg-forest px-2.5 py-1 rounded-full">Anxiety &amp; Depression</span>
+      <time class="text-xs text-inkSoft uppercase tracking-wide">November 6, 2026</time>
+    </div>
+    <h2 class="serif text-2xl font-semibold text-forestDeep leading-tight mb-3">
+      <a href="blog/seasonal-depression.html" class="hover:text-forest transition">Why You Feel Depressed When the Seasons Change</a>
+    </h2>
+    <p class="text-ink/75 text-sm leading-relaxed mb-5">Seasonal depression is real and treatable. A licensed therapist explains what causes it, the signs to watch for, and practical steps to feel like yourself again.</p>
+    <a href="blog/seasonal-depression.html" class="underline-link text-sm font-medium">Read article →</a>
+  </article>
+
   <!-- Post — Christian Counseling and Mental Health -->
   <article class="bg-white border border-line rounded-xl p-6 md:p-8 mb-6 hover:border-forest transition">
     <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -323,6 +336,28 @@
   </article>
 
 </main>
+
+<!-- Email Signup -->
+<section class="bg-sage py-16 px-6">
+  <div class="max-w-2xl mx-auto text-center">
+    <p class="text-xs font-bold tracking-[0.25em] uppercase text-forest mb-3">Stay Connected</p>
+    <h2 class="serif text-3xl md:text-4xl font-bold text-forestDeep leading-tight mb-4">Get Wellness Insights in Your Inbox</h2>
+    <p class="text-ink/70 text-base mb-8">Practical tips on mental health, relationships, and resilience. No spam. Unsubscribe anytime.</p>
+    <!-- Replace ACTION_URL with your Mailchimp form action URL from Audience > Signup forms > Embedded forms -->
+    <form action="ACTION_URL" method="post" target="_blank" novalidate class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+      <input type="email" name="EMAIL" placeholder="Your email address" required
+        class="flex-1 px-5 py-4 rounded-xl border border-white/60 bg-white text-ink placeholder-inkSoft/60 focus:outline-none focus:ring-2 focus:ring-forest text-base shadow-sm" />
+      <!-- Mailchimp bot-prevention field — do not remove -->
+      <div style="position:absolute;left:-5000px;" aria-hidden="true">
+        <input type="text" name="b_PLACEHOLDER" tabindex="-1" value="" />
+      </div>
+      <button type="submit"
+        class="px-7 py-4 bg-forestDeep text-white font-semibold rounded-xl hover:bg-forest transition text-base shadow-sm whitespace-nowrap">
+        Subscribe
+      </button>
+    </form>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="bg-sage">
