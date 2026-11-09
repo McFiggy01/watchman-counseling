@@ -1,7 +1,6 @@
-Options -MultiViews
 RewriteEngine On
 
-# Redirect /page.html → /page (clean URLs, 301 permanent)
+# Redirect /page.html → /page (301 permanent)
 RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L,NE]
 
