@@ -358,7 +358,12 @@
   .underline-link:hover { color: #10b981; }
 
   /* Services marquee */
+  .svc-marquee { position:relative; mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent); -webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent); overflow:hidden; }
+  .svc-track { display:flex; gap:1.25rem; width:max-content; animation:svc-scroll 40s linear infinite; padding:0.5rem 0 1rem; }
+  .svc-track:hover { animation-play-state:paused; }
+  .svc-card { width:280px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:1.4rem 1.5rem 1.25rem; display:flex; flex-direction:column; flex-shrink:0; }
   @keyframes svc-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion:reduce) { .svc-track { animation:none; } }
 
   /* Testimonial marquee */
   .t-section { background: #f7f3e8; padding: 3.5rem 0 4rem; overflow: hidden; }
@@ -546,55 +551,96 @@
       <h2 class="serif text-2xl md:text-3xl font-semibold text-forestDeep leading-tight">Support for the Concerns You're Navigating</h2>
       <p class="mt-5 text-ink/70 leading-relaxed">Focused support for real challenges — at your pace, through telehealth available across New York State.</p>
     </div>
-    <!-- carousel wrapper -->
-    <div class="relative">
-      <div id="svc-track" class="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4" style="scrollbar-width:none;">
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+    <!-- auto-scroll marquee -->
+    <div class="svc-marquee">
+      <div class="svc-track">
+        <!-- set 1 -->
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Anxiety</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Racing thoughts, persistent worry, physical tension. CBT-based tools to help you respond to anxiety rather than be controlled by it.</p>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Racing thoughts, persistent worry, physical tension. CBT-based tools to help you respond to anxiety rather than be controlled by it.</p>
           <a href="anxiety.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Depression</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Persistent low mood, low energy, withdrawal from things you used to enjoy. Evidence-based support to help you re-engage with your life.</p>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Persistent low mood, low energy, withdrawal from things you used to enjoy. Evidence-based support to help you re-engage with your life.</p>
           <a href="depression.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Addiction &amp; Recovery</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Harm-reduction-informed support for substance use and recovery. OASAS-trained — no judgment, practical tools for where you actually are.</p>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Harm-reduction-informed support for substance use and recovery. OASAS-trained — no judgment, practical tools for where you actually are.</p>
           <a href="addiction-recovery.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Trauma</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Trauma affects how you see yourself, others, and the world. Trauma-Focused CBT and trauma-informed care to help you process and move forward.</p>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Trauma affects how you see yourself, others, and the world. Trauma-Focused CBT and trauma-informed care to help you process and move forward.</p>
           <a href="trauma.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Men's Issues</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Anger, fatherhood, identity, purpose — the parts of being a man that rarely get space to breathe. A focused area with real clinical experience behind it.</p>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Anger, fatherhood, identity, purpose — the parts of being a man that rarely get space to breathe. A focused area with real clinical experience behind it.</p>
           <a href="mens-issues.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Teens &amp; Young Adults</h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">Identity, school pressure, family dynamics, life transitions. Collaborative work that meets young people where they are and involves the whole family system when helpful.</p>
-          <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Identity, school pressure, family dynamics, life transitions. Collaborative work that meets young people where they are and involves the whole family system when helpful.</p>
+          <a href="index.html#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
         </div>
-        <div class="bg-white rounded-lg p-6 border border-line flex-none w-72 snap-start">
+        <div class="svc-card">
           <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
           <h3 class="serif text-base font-semibold text-forestDeep">Faith-Integrated <span class="text-inkSoft text-sm font-normal italic">&nbsp;&middot; on request</span></h3>
-          <p class="mt-3 text-ink/75 text-sm leading-relaxed">For clients who want their faith woven into sessions. Available on request — sessions are faith-neutral by default.</p>
-          <a href="#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">For clients who want their faith woven into sessions. Available on request — sessions are faith-neutral by default.</p>
+          <a href="index.html#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+        </div>
+        <!-- set 2 (duplicate for seamless loop) -->
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Anxiety</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Racing thoughts, persistent worry, physical tension. CBT-based tools to help you respond to anxiety rather than be controlled by it.</p>
+          <a href="anxiety.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Depression</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Persistent low mood, low energy, withdrawal from things you used to enjoy. Evidence-based support to help you re-engage with your life.</p>
+          <a href="depression.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Addiction &amp; Recovery</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Harm-reduction-informed support for substance use and recovery. OASAS-trained — no judgment, practical tools for where you actually are.</p>
+          <a href="addiction-recovery.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Trauma</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Trauma affects how you see yourself, others, and the world. Trauma-Focused CBT and trauma-informed care to help you process and move forward.</p>
+          <a href="trauma.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Men's Issues</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Anger, fatherhood, identity, purpose — the parts of being a man that rarely get space to breathe. A focused area with real clinical experience behind it.</p>
+          <a href="mens-issues.html" class="underline-link mt-5 inline-block text-sm">Learn more &rarr;</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Teens &amp; Young Adults</h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">Identity, school pressure, family dynamics, life transitions. Collaborative work that meets young people where they are and involves the whole family system when helpful.</p>
+          <a href="index.html#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
+        </div>
+        <div class="svc-card" aria-hidden="true">
+          <div class="petal scale-[0.65] mb-4" style="margin-left:0;"></div>
+          <h3 class="serif text-base font-semibold text-forestDeep">Faith-Integrated <span class="text-inkSoft text-sm font-normal italic">&nbsp;&middot; on request</span></h3>
+          <p class="mt-3 text-ink/75 text-sm leading-relaxed flex-1">For clients who want their faith woven into sessions. Available on request — sessions are faith-neutral by default.</p>
+          <a href="index.html#book" class="underline-link mt-5 inline-block text-sm">Book a Consult</a>
         </div>
       </div>
-      <!-- prev / next arrows -->
-      <button onclick="document.getElementById('svc-track').scrollBy({left:-300,behavior:'smooth'})" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-9 h-9 rounded-full bg-white border border-line shadow items-center justify-center text-forestDeep hover:bg-sage transition" aria-label="Previous">&#8592;</button>
-      <button onclick="document.getElementById('svc-track').scrollBy({left:300,behavior:'smooth'})" class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-9 h-9 rounded-full bg-white border border-line shadow items-center justify-center text-forestDeep hover:bg-sage transition" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
