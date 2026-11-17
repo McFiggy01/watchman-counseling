@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>5 CBT Tools to Quiet Anxious Thinking — Watchman Counseling</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #fdfaf3;
+    --sage: #dcf2e1;
+    --forest: #064e3b;
+    --forestDeep: #022c22;
+    --accent: #10b981;
+    --ink: #1f2937;
+    --inkSoft: #475569;
+    --line: #e5e7eb;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 0;
+    background: var(--cream);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--forestDeep);
+    color: white;
+    padding: 2in 0.75in 0.6in;
+    min-height: 3.2in;
+    position: relative;
+  }
+  .cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #dcf2e1;
+    margin-bottom: 0.6rem;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30pt;
+    font-weight: 700;
+    line-height: 1.1;
+    color: white;
+    max-width: 5.5in;
+  }
+  .cover-sub {
+    margin-top: 1rem;
+    font-size: 11pt;
+    color: rgba(255,255,255,0.75);
+    max-width: 4.5in;
+    line-height: 1.55;
+  }
+  .cover-rule {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin: 1.25rem 0;
+    border-radius: 2px;
+  }
+  .cover-byline {
+    font-size: 9pt;
+    color: rgba(255,255,255,0.55);
+    margin-top: 1.5rem;
+  }
+  .cover-byline strong { color: rgba(255,255,255,0.85); }
+
+  /* ── BODY ── */
+  .body-content {
+    padding: 0.55in 0.75in 0.5in;
+  }
+
+  .intro {
+    background: var(--sage);
+    border-left: 4px solid var(--forest);
+    padding: 0.6rem 0.9rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1.1rem;
+    font-size: 10.5pt;
+    color: var(--forestDeep);
+    line-height: 1.6;
+  }
+
+  .tool {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .tool-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 32px;
+    margin-top: 2px;
+  }
+  .tool-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--forestDeep);
+    line-height: 1.2;
+    padding-top: 4px;
+  }
+  .tool-body {
+    padding-left: 44px;
+    font-size: 10.5pt;
+    color: var(--inkSoft);
+    line-height: 1.65;
+  }
+  .tool-body p + p { margin-top: 0.4rem; }
+
+  .try-it {
+    margin-top: 0.5rem;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+    font-size: 9.5pt;
+  }
+  .try-it-label {
+    font-weight: 600;
+    color: var(--forest);
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ── FOOTER CTA ── */
+  .cta-block {
+    background: var(--forestDeep);
+    color: white;
+    padding: 0.55in 0.75in;
+    margin-top: 0.1in;
+  }
+  .cta-block h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16pt;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+  .cta-block p {
+    font-size: 10pt;
+    color: rgba(255,255,255,0.75);
+    max-width: 5.5in;
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+  .cta-contact {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .cta-item {
+    font-size: 9.5pt;
+    color: var(--sage);
+  }
+  .cta-item span {
+    display: block;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 2px;
+  }
+  .cta-disclaimer {
+    margin-top: 0.6rem;
+    font-size: 7.5pt;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.5;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { width: 100%; margin: 0; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cta-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .intro { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .try-it { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    @page { margin: 0; size: letter; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-eyebrow">Watchman Counseling · Free Resource</div>
+    <h1>5 CBT Tools to Quiet Anxious Thinking</h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">Practical, evidence-based techniques from Cognitive Behavioral Therapy — built for people who want to understand what's driving their anxiety and start responding to it differently.</p>
+    <p class="cover-byline">Written by <strong>Hector L. Figueroa, LCSW</strong> · NY Licensed Clinical Social Worker · watchmancounseling.com</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-content">
+
+    <div class="intro">
+      Anxiety is not a character flaw or a sign that something is fundamentally wrong with you. It's your nervous system trying to protect you — and sometimes overreacting. CBT gives you practical tools to interrupt that cycle and respond differently. These five techniques work. Use them consistently.
+    </div>
+
+    <!-- TOOL 1 -->
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-num">1</div>
+        <div class="tool-title">The Thought Record</div>
+      </div>
+      <div class="tool-body">
+        <p>Anxious thoughts feel like facts. They're not. A thought record helps you slow down and examine what's actually happening versus what your brain is predicting. Write down the situation, the automatic thought ("I'm going to fail"), the emotion and intensity (anxiety, 80%), and then ask: what's the evidence for and against this thought? What would I tell a friend who thought this?</p>
+        <div class="try-it">
+          <div class="try-it-label">Try it</div>
+          Next time you feel anxious, grab a notebook. Write: (1) What just happened? (2) What thought came up? (3) What emotion, 0–100? (4) What's the realistic take? Rate the anxiety again after.
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 2 -->
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-num">2</div>
+        <div class="tool-title">Scheduled Worry Time</div>
+      </div>
+      <div class="tool-body">
+        <p>Trying to stop worrying never works — it just moves the worry underground. Instead, give worry a designated slot: 15–20 minutes at the same time each day (not before bed). When a worry pops up outside that window, write it down and tell yourself: "I'll deal with that at 5pm." This trains your brain that worries have a container — they're not emergencies.</p>
+        <div class="try-it">
+          <div class="try-it-label">Try it</div>
+          Pick a specific time and place for your daily worry window. Keep a notepad nearby to capture worries as they come up. When the time arrives, work through the list — then close it.
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 3 -->
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-num">3</div>
+        <div class="tool-title">The 5-4-3-2-1 Grounding Technique</div>
+      </div>
+      <div class="tool-body">
+        <p>When anxiety spikes, your nervous system is in threat mode and your thinking goes offline. Grounding pulls you back into the present through your senses. Name: 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste. This isn't just distraction — it interrupts the physiological anxiety spiral by forcing your brain into sensory attention.</p>
+        <div class="try-it">
+          <div class="try-it-label">Try it</div>
+          Practice this when you're not anxious first, so it becomes automatic. Run through it twice. Then use it the next time you feel anxiety rising before it peaks.
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 4 -->
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-num">4</div>
+        <div class="tool-title">Evidence Testing</div>
+      </div>
+      <div class="tool-body">
+        <p>Anxious thinking tends to catastrophize — assuming the worst outcome and treating it as inevitable. Evidence testing asks you to put the belief on trial. Take the anxious thought and ask: What's the actual evidence this is true? Have I predicted this before and been wrong? What's the most realistic outcome, not the worst? What's one thing I could do if the feared thing actually happened?</p>
+        <div class="try-it">
+          <div class="try-it-label">Try it</div>
+          Write your anxious thought as a statement ("I'm going to embarrass myself"). Then write three pieces of real evidence for it and three against it. What does the balance suggest?
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 5 -->
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-num">5</div>
+        <div class="tool-title">Gradual Exposure (Do the Thing Anyway)</div>
+      </div>
+      <div class="tool-body">
+        <p>Avoidance is anxiety's best friend. Every time you avoid something that triggers anxiety, you tell your brain: "That was a real threat — good call." Gradual exposure works in reverse: you approach the feared situation in small, manageable steps until your nervous system learns it can handle it. Start with something that's a 3/10 on the fear scale, not a 10/10.</p>
+        <div class="try-it">
+          <div class="try-it-label">Try it</div>
+          List one situation you've been avoiding. Break it into five smaller steps from easiest to hardest. Do step one this week. Notice that anxiety rises, peaks, and then drops — that drop is your nervous system updating its threat model.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body-content -->
+
+  <!-- CTA FOOTER -->
+  <div class="cta-block">
+    <h2>Ready to Go Deeper?</h2>
+    <p>These tools work — and they work even better with a skilled therapist walking alongside you. If anxiety is affecting your daily life, your relationships, or your ability to function the way you want to, therapy gives you a structured, supportive space to get real traction.</p>
+    <p>I offer a free 15-minute consultation so you can ask questions and decide if we're the right fit. No pressure, no commitment.</p>
+    <div class="cta-contact">
+      <div class="cta-item"><span>Call</span>(929) 684-1096</div>
+      <div class="cta-item"><span>Email</span>hello@watchmancounseling.com</div>
+      <div class="cta-item"><span>Book online</span>watchmancounseling.com</div>
+    </div>
+    <p class="cta-disclaimer">Hector L. Figueroa, LCSW · NY License #104782 · NPI #1801279963 · Telehealth across New York State<br>This guide is for educational purposes only and does not constitute therapy or clinical advice. If you are in crisis, call 988.</p>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
