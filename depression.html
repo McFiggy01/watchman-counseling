@@ -206,6 +206,70 @@
   </div>
 </section>
 
+<!-- ─── Free Guide Download ─── -->
+<section id="free-guide" class="bg-forestDeep">
+  <div class="max-w-5xl mx-auto px-6 py-12 md:py-16">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="text-sage text-xs font-semibold uppercase tracking-widest">Free Resource</span>
+        <h2 class="serif text-2xl md:text-3xl font-semibold text-white mt-2 leading-tight">Breaking the Cycle: A Daily Reset Guide for Low Mood</h2>
+        <p class="text-white/70 mt-4 leading-relaxed">Depression tells you nothing will help. This guide gives you five evidence-based strategies that work — before you feel like it.</p>
+        <ul class="mt-5 space-y-2 text-sm text-white/65">
+          <li class="flex gap-2"><span class="text-accent mt-0.5">✓</span> Behavioral activation — act your way into feeling better</li>
+          <li class="flex gap-2"><span class="text-accent mt-0.5">✓</span> Break the rumination loop with one practical tool</li>
+          <li class="flex gap-2"><span class="text-accent mt-0.5">✓</span> Why micro-connections work as medicine</li>
+        </ul>
+      </div>
+      <div class="bg-cream rounded-xl p-6 shadow-lg">
+        <p class="font-semibold text-forestDeep mb-1">Get the free PDF guide</p>
+        <p class="text-ink/55 text-sm mb-5">Sent to your inbox instantly. No spam, unsubscribe anytime.</p>
+        <form id="guide-form-depression" onsubmit="submitGuideForm(this,'depression'); return false;">
+          <label class="sr-only" for="guide-email-depression">Email address</label>
+          <input type="email" id="guide-email-depression" name="EMAIL" placeholder="Your email address" required class="w-full border border-line rounded-lg px-4 py-3 text-ink text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-accent">
+          <button type="submit" class="w-full bg-forest text-white rounded-lg px-4 py-3 font-semibold text-sm hover:bg-forestDeep transition">Send Me the Free Guide →</button>
+        </form>
+        <p id="guide-msg-depression" class="hidden mt-3 text-sm text-center font-medium text-forest"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+var _guidePDFs = {
+  'anxiety': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/5eaf5854-e325-dc0d-7c14-a3d951b4a6f3/5_CBT_Tools_to_Quiet_Anxious_Thinking_mdash_Watchman_Counseling.pdf',
+  'depression': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/de7e826e-97c6-df31-b7d7-d28a0c15f92d/Breaking_the_Cycle__A_Daily_Reset_Guide_for_Low_Mood_mdash_Watchman_Counseling.pdf',
+  'addiction': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/57ae5735-9194-088b-bc0e-c554ba8364c0/The_First_30_Days__A_Practical_Recovery_Roadmap_mdash_Watchman_Counseling.pdf',
+  'trauma': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/fce72285-2bb5-759c-07fb-bd49281883dc/Understanding_Your_Nervous_System_After_Trauma_mdash_Watchman_Counseling.pdf',
+  'mens-issues': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/c0446f55-302b-66b4-57f1-abf48a6ab838/The_Man_039_s_Guide_to_Getting_Unstuck_mdash_Watchman_Counseling.pdf',
+  'faith': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/b1fede0d-a47d-9eae-215d-3f1406a0531f/When_Faith_and_Struggle_Meet_mdash_Watchman_Counseling.pdf',
+  'anger': 'https://mcusercontent.com/9353b6670d0f81e74ca5767f3/files/6bd78abe-f1b1-f6ee-764c-31bcda9d03c5/From_Reactive_to_Regulated__Managing_Anger_Before_It_Manages_You_mdash_Watchman_Counseling.pdf'
+};
+function submitGuideForm(form, specialty) {
+  var email = form.querySelector('[name="EMAIL"]').value;
+  var btn = form.querySelector('button[type="submit"]');
+  var msg = document.getElementById('guide-msg-' + specialty);
+  btn.disabled = true; btn.textContent = 'Sending…';
+  window['_mc_cb_' + specialty] = function(data) {
+    var old = document.getElementById('_mc_script_' + specialty);
+    if (old) old.remove();
+    if (data.result === 'success') {
+      form.style.display = 'none';
+      msg.innerHTML = '✓ Your guide is downloading now. <a href="' + _guidePDFs[specialty] + '" target="_blank" class="underline">Click here</a> if it doesn\'t open.';
+      msg.className = 'mt-3 text-sm text-center font-medium text-forest';
+      window.open(_guidePDFs[specialty], '_blank');
+    } else {
+      btn.disabled = false; btn.textContent = 'Send Me the Free Guide →';
+      msg.textContent = data.msg ? data.msg.replace(/<[^>]+>/g,'') : 'Something went wrong. Try again.';
+      msg.className = 'mt-3 text-sm text-center font-medium text-red-600';
+    }
+    msg.classList.remove('hidden');
+  };
+  var s = document.createElement('script');
+  s.id = '_mc_script_' + specialty;
+  s.src = 'https://salembreath.us9.list-manage.com/subscribe/post-json?u=9353b6670d0f81e74ca5767f3&id=814de0b424&EMAIL=' + encodeURIComponent(email) + '&SPECIALTY=' + encodeURIComponent(specialty) + '&c=_mc_cb_' + specialty;
+  document.head.appendChild(s);
+}
+</script>
+
 <!-- ─── Booking ─── -->
 <section id="book" class="bg-sage">
   <div class="max-w-4xl mx-auto px-6 py-10 md:py-14 text-center">
