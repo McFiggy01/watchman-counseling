@@ -13,7 +13,7 @@
   }
   body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--ink); font-size: 11pt; line-height: 1.6; }
   .page { width: 8.5in; min-height: 11in; margin: 0 auto; padding: 0; background: var(--cream); }
-  .cover { background: var(--forestDeep); color: white; padding: 2in 0.75in 0.6in; min-height: 3.2in; }
+  .cover { background: var(--forestDeep); color: white; padding: 0.3in 0.75in 0.6in; min-height: 2.5in; }
   .cover-eyebrow { font-size: 8pt; letter-spacing: 0.25em; text-transform: uppercase; color: #dcf2e1; margin-bottom: 0.6rem; }
   .cover h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 28pt; font-weight: 700; line-height: 1.1; color: white; max-width: 5.5in; }
   .cover-sub { margin-top: 1rem; font-size: 11pt; color: rgba(255,255,255,0.75); max-width: 4.5in; line-height: 1.55; }
@@ -22,14 +22,14 @@
   .cover-byline strong { color: rgba(255,255,255,0.85); }
   .body-content { padding: 0.55in 0.75in 0.5in; }
   .intro { background: var(--sage); border-left: 4px solid var(--forest); padding: 0.6rem 0.9rem; border-radius: 0 6px 6px 0; margin-bottom: 1.1rem; font-size: 10.5pt; color: var(--forestDeep); line-height: 1.6; }
-  .tool { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+  .tool { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); page-break-inside: avoid; break-inside: avoid; }
   .tool:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
   .tool-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.4rem; }
   .tool-num { font-family: 'Playfair Display', Georgia, serif; font-size: 22pt; font-weight: 700; color: var(--accent); line-height: 1; min-width: 32px; margin-top: 2px; }
   .tool-title { font-family: 'Playfair Display', Georgia, serif; font-size: 14pt; font-weight: 600; color: var(--forestDeep); line-height: 1.2; padding-top: 4px; }
   .tool-body { padding-left: 44px; font-size: 10.5pt; color: var(--inkSoft); line-height: 1.65; }
   .tool-body p + p { margin-top: 0.4rem; }
-  .try-it { margin-top: 0.5rem; background: white; border: 1px solid var(--line); border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 9.5pt; }
+  .try-it { margin-top: 0.5rem; background: white; border: 1px solid var(--line); border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 9.5pt; page-break-inside: avoid; break-inside: avoid; }
   .try-it-label { font-weight: 600; color: var(--forest); font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
   .cta-block { background: var(--forestDeep); color: white; padding: 0.55in 0.75in; margin-top: 0.1in; }
   .cta-block h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 16pt; font-weight: 600; margin-bottom: 0.5rem; color: white; }
@@ -42,7 +42,7 @@
     body { background: white; }
     .page { width: 100%; margin: 0; }
     .cover, .cta-block, .intro, .try-it { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { margin: 0; size: letter; }
+    @page { margin: 0.35in 0 0; size: letter; }
   }
 </style>
 </head>

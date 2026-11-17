@@ -39,8 +39,8 @@
   .cover {
     background: var(--forestDeep);
     color: white;
-    padding: 2in 0.75in 0.6in;
-    min-height: 3.2in;
+    padding: 0.3in 0.75in 0.6in;
+    min-height: 2.5in;
     position: relative;
   }
   .cover-eyebrow {
@@ -100,6 +100,8 @@
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--line);
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
   .tool:last-of-type {
     border-bottom: none;
@@ -144,6 +146,8 @@
     border-radius: 6px;
     padding: 0.5rem 0.7rem;
     font-size: 9.5pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
   .try-it-label {
     font-weight: 600;
@@ -207,7 +211,7 @@
     .cta-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .intro { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .try-it { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { margin: 0; size: letter; }
+    @page { margin: 0.35in 0 0; size: letter; }
   }
 </style>
 </head>
