@@ -290,31 +290,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          cream: '#fdfaf3',     // body bg — warm cream like the template
-          sage: '#dcf2e1',      // hero bg — soft mint/sage with emerald undertone
-          sageDeep: '#b9e0c4',  // secondary panels
-          forest: '#064e3b',    // emerald-900 — headlines & CTAs (replaces template dark teal)
-          forestDeep: '#022c22', // emerald-950 — strongest text
-          accent: '#10b981',    // emerald-500 — Watchman brand color, for hover/links
-          accentSoft: '#34d399',
-          ink: '#1f2937',       // body text on light
-          inkSoft: '#475569',   // secondary text
-          line: '#e5e7eb',      // dividers
-        },
-        fontFamily: {
-          serif: ['"Playfair Display"', 'Georgia', 'serif'],
-          sans: ['Inter', 'system-ui', 'sans-serif'],
-        },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="tailwind.css">
 
 <style>
   html { scroll-behavior: smooth; }
@@ -426,7 +402,7 @@
 <!-- ─── Hero ─── -->
 <section class="bg-sage relative overflow-hidden">
   <div class="max-w-4xl mx-auto px-6 py-14 md:py-20 text-center">
-    <h1 class="serif text-4xl md:text-5xl font-bold text-forestDeep leading-[1.1] tracking-tight">Online Christian Therapist<br/>in New York for Anxiety,<br class="hidden sm:block"/>Depression, and Recovery</h1>
+    <h1 class="serif text-3xl md:text-5xl font-bold text-forestDeep leading-[1.1] tracking-tight">Online Christian Therapist<br/>in New York for Anxiety,<br/>Depression, and Recovery</h1>
     <p class="mt-5 text-base text-ink/80 max-w-xl mx-auto leading-relaxed">Anxiety, depression, trauma, addiction — these things are heavy. And trying to push through them alone makes them heavier. You deserve a space to actually deal with it. Christian faith-integrated counseling available; all faiths and backgrounds welcome.</p>
     <div class="mt-8 flex justify-center">
       <a href="#book" class="btn-primary">Book a Free 15-Minute Consultation</a>
