@@ -288,7 +288,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <link rel="stylesheet" href="tailwind.css">
 
@@ -1125,7 +1126,7 @@ Cal("ui",{"styles":{"branding":{"brandColor":"#064e3b"}},"hideEventTypeDetails":
       <div class="mt-4">
         <!-- Professional verification provided by Psychology Today -->
         <a href="https://www.psychologytoday.com/profile/926003" class="sx-verified-seal"></a>
-        <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="13" data-id="926003" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzkyNjAwMz9jYWxsYmFjaz1zeGNhbGxiYWNr"></script>
+        <script defer src="https://member.psychologytoday.com/verified-seal.js" data-badge="13" data-id="926003" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzkyNjAwMz9jYWxsYmFjaz1zeGNhbGxiYWNr"></script>
         <!-- End Verification -->
       </div>
     </div>
@@ -1178,21 +1179,24 @@ Cal("ui",{"styles":{"branding":{"brandColor":"#064e3b"}},"hideEventTypeDetails":
 
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 
-<!-- Voiceflow Chat Widget -->
+<!-- Voiceflow Chat Widget — deferred until page is idle -->
 <script type="text/javascript">
-  (function(d, t) {
-    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  function loadVoiceflow() {
+    var v = document.createElement('script'), s = document.getElementsByTagName('script')[0];
     v.onload = function() {
       window.voiceflow.chat.load({
         verify: { projectID: '6a0a17d0eeeda6722d42f77a' },
         url: 'https://general-runtime.voiceflow.com',
-        voice: {
-          url: "https://runtime-api.voiceflow.com"
-        }
+        voice: { url: "https://runtime-api.voiceflow.com" }
       });
-    }
+    };
     v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadVoiceflow, { timeout: 4000 });
+  } else {
+    setTimeout(loadVoiceflow, 2000);
+  }
 </script>
 
 <script>
